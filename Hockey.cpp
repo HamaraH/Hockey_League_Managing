@@ -4,10 +4,12 @@
 
 using namespace std;
 
-    Hockey::Hockey(string histoire, string couleur,vector<Joueur> liste){
+    Hockey::Hockey(string histoire, string couleur,vector<Joueur> liste,Palmares palma){
         this->Histoire=histoire;
         this->Couleur=couleur;
         this->Liste_joueurs = liste;
+        this->Palma = palma;
+
     }
 
     void Hockey::printHistoire(){
