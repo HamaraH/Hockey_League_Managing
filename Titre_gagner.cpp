@@ -5,7 +5,7 @@
         this->palmares=NULL;
     }
     
-    Titre_gagner::Titre_gagner(Hockey* club,Palmares* palmares){
+    Titre_gagner::Titre_gagner(Club* club,Palmares* palmares){
         this->club=club;
         this->palmares=palmares;
     }
@@ -14,10 +14,10 @@
     }
 
 
-    Hockey* Titre_gagner::getclub(){
+    Club* Titre_gagner::getclub(){
         return this->club;
     }
-    void Titre_gagner::setclub(Hockey* club){
+    void Titre_gagner::setclub(Club* club){
         this->club=club;
     }
     

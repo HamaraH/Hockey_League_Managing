@@ -24,7 +24,7 @@
     void Entraineur::addtitre(Titre_gagner titre){
         this->titres.push_back(titre);
     }
-    std::vector<Titre_gagner> Entraineur::gettitre_club(Hockey* club){
+    std::vector<Titre_gagner> Entraineur::gettitre_club(Club* club){
         std::vector<Titre_gagner> titre_du_club;
         for(int i=0;i<this->titres.size();i++){
             if(this->titres[i].getclub()==club){

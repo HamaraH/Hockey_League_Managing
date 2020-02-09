@@ -3,21 +3,21 @@
 
 
 #include "Palmares.hpp"
-#include "Hockey.hpp"
+#include "Club.hpp"
 
 class Titre_gagner{
 
     private: 
-        Hockey* club;
+        Club* club;
         Palmares* palmares;
 
     public:
         Titre_gagner();
-        Titre_gagner(Hockey*,Palmares*);
+        Titre_gagner(Club*,Palmares*);
         ~Titre_gagner();
 
-        Hockey* getclub();
-        void setclub(Hockey*);
+        Club* getclub();
+        void setclub(Club*);
         Palmares* getpalmares();
         void setpalmares(Palmares*);
 

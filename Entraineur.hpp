@@ -23,7 +23,7 @@ class Entraineur{
     ~Entraineur();
 
     void addtitre(Titre_gagner);
-    std::vector<Titre_gagner> gettitre_club(Hockey*);
+    std::vector<Titre_gagner> gettitre_club(Club*);
     std::vector<Titre_gagner> gettitre_palmares(std::string);
 
     std::string getnom();
