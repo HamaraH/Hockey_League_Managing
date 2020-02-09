@@ -8,6 +8,7 @@
 class Joueur{
 
     private:
+
         std::string Nom;
         std::string Prenom;
         float Taille;
@@ -16,17 +17,25 @@ class Joueur{
 
     public:
 
+    Joueur();
     Joueur(std::string nom, std::string prenom, float taille, float poids, std::string ville);
+    ~Joueur();
+
     std::string getNom();
     void setNom(std::string nom);
+
     void setPrenom(std::string nom);
     std::string getPrenom();
+
     void setTaille(float taille);
     float getTaille();
+
     void setPoids(float poids);
     float getPoids();
+
     void setVille(std::string ville);
     std::string getVille();
+    
     void toString();
     
 };

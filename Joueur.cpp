@@ -4,6 +4,7 @@
 
 using namespace std;
 
+Joueur::Joueur(){}
 
 Joueur::Joueur(string nom, string prenom, float taille, float poids, string ville){
     this->Nom = nom;
@@ -13,6 +14,7 @@ Joueur::Joueur(string nom, string prenom, float taille, float poids, string vill
     this->Ville = ville;
 }
 
+Joueur::~Joueur(){}
  
         string Joueur::getNom()
         {

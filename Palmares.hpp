@@ -11,14 +11,16 @@ class Palmares{
     std::string Date;
 
     public:
+
     Palmares();
     Palmares(std::string titre, std::string date);
+    ~Palmares();
+
     std::string getTitre();
     void setTitre(std::string titre);
+
     std::string getDate();
     void setDate(std::string titre);
-   
-
 
 };
 
