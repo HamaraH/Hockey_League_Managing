@@ -1,6 +1,4 @@
-
 #include <string>
-
 #include "Parcours.hpp"
 
 using namespace std;
@@ -14,7 +12,8 @@ Parcours::Parcours(std::string nom, std::tm date){
 
 }
 
-Parcours::~Parcours();
+Parcours::~Parcours(){
+}
 
 std::string Parcours::getNomClub(){
 
@@ -38,4 +37,3 @@ void Parcours::setDate(std::tm date){
 
     this->date = date;
 }
-

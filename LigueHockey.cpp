@@ -1,47 +1,41 @@
 #include "LigueHockey.hpp"
         LigueHockey::LigueHockey(){
-            this->score_victoire=3;
-            this->score_null=1;
-            this->score_defaite=0;
         }
-        LigueHockey::LigueHockey(int victoire,int null,int defaite){
-            this->score_victoire=victoire;
-            this->score_null=null;
-            this->score_defaite=defaite;
-        }
-        LigueHockey::LigueHockey(int victoire, int null,int defaite,std::vector<Clubscore*> clubs){
-            this->score_victoire=victoire;
-            this->score_null=null;
-            this->score_defaite=defaite;
+
+        LigueHockey::LigueHockey(std::vector<Clubscore*> clubs, std::vecotr<Stade*> stades, std::vector<Entraineur*> entraineurs){
             this->clubs=clubs;
+            this->stades=stades;
+            this->entraineurs=entraineurs;
         }
+
         LigueHockey::~LigueHockey(){
         }
 
         void LigueHockey::addclub(Clubscore* club){
             this->clubs.push_back(club);
         }
+        void LigueHockey::addstade(Stade* stade){
+            this->stades.push_back(stade);
+        }
+        void LigueHockey::addentaineur(Entraineur* entraienur){
+            this->entraineurs.push_back(entraineur);
+        }
+
         std::vector<Clubscore*> LigueHockey::getclubs(){
             return this->clubs;
         }
         void LigueHockey::setclubs(std::vector<Clubscore*> club){
             this->clubs=clubs;
         }
-        int LigueHockey::getscore_victoire(){
-            return this->score_victoire;
+        std::vector<Stade*> LigueHockey::getstades(){
+            return this->stades;
         }
-        void LigueHockey::setscore_victoire(int victoire){
-            this->score_victoire=victoire;
+        void LigueHockey::setstade(std::vector<Stade*> stades){
+            this->stades =stades;
         }
-        int LigueHockey::getscore_defaite(){
-            return this->score_defaite;
+        std::vector<Entraineur*> LigueHockey::getentraineurs(){
+            return this->entraineurs;
         }
-        void LigueHockey::setscore_defaite(int defaite){
-            this->score_defaite=defaite;
-        }
-        int LigueHockey::getscore_null(){
-            return this->score_null;
-        }
-        void LigueHockey::setscore_null(int null){
-            this->score_null=null;
+        void LigueHockey::setentraineurs(std::vector<Entraineur*> entraineurs){
+            this->entraineurs = entraineurs;
         }
