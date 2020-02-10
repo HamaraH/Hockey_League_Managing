@@ -10,6 +10,7 @@
 #include "Palmares.hpp"
 #include "Stade.hpp"
 #include "Personne.hpp"
+#include "Entraineur.hpp"
 
 class Club{
 
@@ -19,18 +20,22 @@ class Club{
     std::string couleur;
     std::string date;
     std::vector<Joueur> effectif;
-    Palmares palmares;
+    std::vector<Palmares> palmares; // peut etre a convertir en tableau d'adresse -> si le cas faire gaffe aux destructreurs
     Stade stade;
     std::string ville;
     std::string adresse;
     std::vector<Personne> staff_technique;
+    Entraineur* entraineur;
 
     public:
 
     Club();
-    Club(std::string histoire, std::string couleur,std::vector<Joueur> liste, Palmares palmares, Stade stade, std::string ville, std::string adresse, std::vector<Personne> staff_technique);
+    Club(std::string histoire, std::string couleur,std::vector<Joueur> liste, std::vector<Palmares> palmares, Stade stade, std::string ville, std::string adresse, std::vector<Personne> staff_technique, Entraineur* entraineur);
     ~Club();
     
+    void ajout_Palmares(Palmares);
+
+
     std::string getHistoire();
     void setHistoire(std::string histoire);
 
@@ -43,8 +48,8 @@ class Club{
     std::vector<Joueur> getListeJoueurs();
     void setListeJoueurs(std::vector<Joueur> liste);
 
-    void setPalmares(Palmares palma);
-    Palmares getPalmares();
+    void setPalmares(std::vector<Palmares> palma);
+    std::vector<Palmares> getPalmares();
 
     void setStade(Stade stade);
     Stade getStade();
@@ -57,6 +62,11 @@ class Club{
 
     void setStaffTechnique(std::vector<Personne> staff_technique);
     std::vector<Personne> getStaffTechnique();
+
+    void setentraineur(Entraineur*);
+    Entraineur* getentraineur();
+
+
 
 };
 
