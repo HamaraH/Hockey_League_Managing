@@ -227,3 +227,95 @@ tm Creation::date(){
 
     return localdate;
 }
+
+
+
+
+
+void Afficher::club (Club* club){
+    std::cout<<"Club de "<< club->getVille() << " à l'adresse " << club->getAdresse() << "\n";
+}
+void Afficher::entraineur(Entraineur* entraineur){
+    std::cout<<entraineur->getnom()<<" "<<entraineur->getprenom()<<" ";
+
+}
+void Afficher::joueur(Joueur* joueur){
+    std::cout<< joueur->getNom()<<" "<< joueur->getPrenom()<< " de "<< joueur->getVille()<<"\n";
+
+}
+void Afficher::palmares(Palmares* palmares){
+    std::cout<<palmares->getTitre()<<" du "<< palmares->getDate().tm_year+1900<<"/"<<palmares->getDate().tm_mon+1<<"/"<<palmares->getDate().tm_mday<<"\n";
+
+}
+void Afficher::parcours(Parcours* parcours){
+    std::cout<<parcours->getNomClub()<<" le "<<parcours->getDate().tm_year+1900<<"/"<<parcours->getDate().tm_mon+1<<"/"<<parcours->getDate().tm_mday<<"\n";
+
+}
+void Afficher::personne(Personne* personne){
+    std::cout<<personne->getNom()<<" : "<< personne->getRole()<<"\n";
+
+}
+void Afficher::stade(Stade* stade){
+    std::cout<<stade->getNom()<<" au "<<stade->getAdresse()<<"\n";
+
+}
+void Afficher::titre_gagner(Titre_gagner* titre_gagner){
+    std::cout<<titre_gagner->getpalmares()->getTitre()<< " au club de la ville de "<< titre_gagner->getclub()->getVille()<<"\n";
+
+}
+void Afficher::joueurduclub(Club* club){
+    for(int i=0;i<club->getListeJoueurs().size;i++){
+        Afficher::joueur(club->getListeJoueurs()[i]);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Entraineur* Traitement::entraineurTitre(LigueHockey ligue){
+    if(ligue.getentraineurs().size==0){
+        return NULL;
+    }
+    else{
+        Entraineur* maxtitre = ligue.getentraineurs()[0];
+        for(int i=1;i<ligue.getentraineurs().size;i++){
+            if(ligue.getentraineurs()[i]->gettitres().size < maxtitre->gettitres().size){
+                maxtitre = ligue.getentraineurs()[i];
+            }
+
+        }
+        return maxtitre;
+    }
+}    
+
+
+Club* Traitement::clubTitre(LigueHockey ligue){
+     if(ligue.getclubs().size==0){
+        return NULL;
+    }
+    else
+        Club* maxclub = ligue.getclubs()[0];
+        for(int i=1;i<ligue.getclubs().size;i++){
+            if(ligue.getclubs()[i]->getPalmares().size < maxclub->getPalmares().size){
+                maxclub = ligue.getclubs()[i];
+            }
+
+        }
+        return maxclub;
+    }
+}

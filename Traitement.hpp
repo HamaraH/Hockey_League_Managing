@@ -34,9 +34,17 @@ class Afficher{
         static void personne(Personne*);
         static void stade(Stade*);
         static void titre_gagner(Titre_gagner*);
+        static void joueurduclub(Club*);
 
-        static void entraineurTitre(std::vector<Entraineur*>);// a voire si je prend pas LigueHockey
-        static void clubTitre(std::vector<Club*>); // la même
+};
+
+class Traitement{
+
+    public:
+
+        static Entraineur* entraineurTitre(LigueHockey);
+        static Club* clubTitre(LigueHockey);
+
 };
 
 
