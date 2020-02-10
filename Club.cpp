@@ -29,6 +29,13 @@ using namespace std;
         this->entraineur->addtitre(new Titre_gagner(this,this->palmares.back()));
     }
 
+    void Club::ajout_joueur(Joueur* joueur){
+        this->effectif.push_back(joueur);
+    }
+    void Club::ajout_personne(Personne* personne){
+        this->staff_technique.push_back(personne);
+    }
+
 
 
     string Club::getHistoire(){

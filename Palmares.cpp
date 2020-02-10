@@ -5,7 +5,7 @@ using namespace std;
 
     Palmares::Palmares(){}
 
-    Palmares::Palmares(string titre, string date){
+    Palmares::Palmares(string titre, std::tm date){
         this->Titre = titre;
         this->Date = date;
     }
@@ -20,11 +20,11 @@ using namespace std;
         return this->Titre;
     }
 
-    void Palmares::setDate(string date){
+    void Palmares::setDate(std::tm date){
         this->Date = date;
     }
 
-    string Palmares::getDate(){
+    tm Palmares::getDate(){
         return this->Date;
     }
     

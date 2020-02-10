@@ -32,6 +32,8 @@ class Club{
     ~Club();
     
     void ajout_Palmares(Palmares*);
+    void ajout_joueur(Joueur*);
+    void ajout_personne(Personne*);
 
 
     std::string getHistoire();

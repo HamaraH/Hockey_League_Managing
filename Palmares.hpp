@@ -2,25 +2,26 @@
 #define PALMARES_H
 
 #include <string>
+#include <ctime>
 
 class Palmares{
 
     private:
 
     std::string Titre;
-    std::string Date;
+    std::tm Date;
 
     public:
 
     Palmares();
-    Palmares(std::string titre, std::string date);
+    Palmares(std::string titre, std::tm date);
     ~Palmares();
 
     std::string getTitre();
     void setTitre(std::string titre);
 
-    std::string getDate();
-    void setDate(std::string titre);
+    std::tm getDate();
+    void setDate(std::tm date);
 
 };
 
