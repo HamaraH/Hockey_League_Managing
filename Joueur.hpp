@@ -13,7 +13,7 @@ class Joueur{
         std::string Prenom;
         float Taille;
         float Poids;
-        std::string Ville;
+        std::string Ville;//manque le parcours
 
     public:
 

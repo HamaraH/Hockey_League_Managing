@@ -9,7 +9,7 @@
             this->score_null=null;
             this->score_defaite=defaite;
         }
-        LigueHockey::LigueHockey(int victoire, int null,int defaite,std::vector<Clubscore> clubs){
+        LigueHockey::LigueHockey(int victoire, int null,int defaite,std::vector<Clubscore*> clubs){
             this->score_victoire=victoire;
             this->score_null=null;
             this->score_defaite=defaite;
@@ -18,13 +18,13 @@
         LigueHockey::~LigueHockey(){
         }
 
-        void LigueHockey::addclub(Clubscore club){
+        void LigueHockey::addclub(Clubscore* club){
             this->clubs.push_back(club);
         }
-        std::vector<Clubscore> LigueHockey::getclubs(){
+        std::vector<Clubscore*> LigueHockey::getclubs(){
             return this->clubs;
         }
-        void LigueHockey::setclubs(std::vector<Clubscore> club){
+        void LigueHockey::setclubs(std::vector<Clubscore*> club){
             this->clubs=clubs;
         }
         int LigueHockey::getscore_victoire(){

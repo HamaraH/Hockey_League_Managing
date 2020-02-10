@@ -1,9 +1,6 @@
 #ifndef ENTRAINEUR_H
 #define ENTRAIEUR_H
 
-#include <iostream>
-#include <string>
-#include <vector>
 
 #include "Titre_gagner.hpp"
 

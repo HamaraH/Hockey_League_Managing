@@ -6,10 +6,11 @@ using namespace std;
 
     Club::Club(){}
 
-    Club::Club(string histoire, string couleur,vector<Joueur> liste,std::vector<Palmares> palmares,Stade stade, string ville, string adresse,vector<Personne> staff_technique, Entraineur* entraineur){
+    Club::Club(string histoire, string couleur,std::tm date,vector<Joueur*> liste,std::vector<Palmares*> palmares,Stade* stade, string ville, string adresse,vector<Personne*> staff_technique, Entraineur* entraineur){
 
         this->histoire=histoire;
         this->couleur=couleur;
+        this->date=date;
         this->effectif=liste;
         this->palmares=palmares;
         this->stade=stade;
@@ -23,9 +24,9 @@ using namespace std;
     Club::~Club(){}
 
 
-    void Club::ajout_Palmares(Palmares palmares){
+    void Club::ajout_Palmares(Palmares* palmares){
         this->palmares.push_back(palmares);
-        this->entraineur->addtitre(new Titre_gagner(this,&this->palmares.back()));
+        this->entraineur->addtitre(new Titre_gagner(this,this->palmares.back()));
     }
 
 
@@ -50,46 +51,46 @@ using namespace std;
        this->couleur = couleur;
     }
 
-    string Club::getDate(){
+    tm Club::getDate(){
 
         return this->date;
     }
 
-    void Club::setDate(string date){
+    void Club::setDate(tm date){
 
        this->date = date;
     }
 
-    vector<Joueur> Club::getListeJoueurs(){
+    vector<Joueur*> Club::getListeJoueurs(){
 
         return this->effectif;
 
     }
 
-    void Club::setListeJoueurs(vector<Joueur> liste){
+    void Club::setListeJoueurs(vector<Joueur*> liste){
 
         this->effectif = liste;
     }
     
-    std::vector<Palmares> Club::getPalmares(){
+    std::vector<Palmares*> Club::getPalmares(){
 
         return this->palmares;
 
     }
 
-    void Club::setPalmares(std::vector<Palmares> palma){
+    void Club::setPalmares(std::vector<Palmares*> palma){
 
         this->palmares = palma;
 
     }
 
-    void Club::setStade(Stade stade){
+    void Club::setStade(Stade* stade){
 
         this->stade = stade;
 
     }
 
-    Stade Club::getStade(){
+    Stade* Club::getStade(){
 
         return this->stade;
 
@@ -119,13 +120,13 @@ using namespace std;
 
    }
 
-   void Club::setStaffTechnique(vector<Personne> staff_technique){
+   void Club::setStaffTechnique(vector<Personne*> staff_technique){
 
        this->staff_technique = staff_technique;
 
    }
 
-   vector<Personne> Club::getStaffTechnique(){
+   vector<Personne*> Club::getStaffTechnique(){
 
        return this->staff_technique;
 
