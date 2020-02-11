@@ -29,6 +29,7 @@ class Club{
 
     Club();
     Club(std::string histoire, std::string couleur,std::tm,std::vector<Joueur*> liste, std::vector<Palmares*> palmares, Stade* stade, std::string ville, std::string adresse, std::vector<Personne*> staff_technique, Entraineur* entraineur);
+    Club(std::string histoire, std::string couleur,std::tm, Stade* stade, std::string ville, std::string adresse, Entraineur* entraineur);
     ~Club();
     
     void ajout_Palmares(Palmares*);

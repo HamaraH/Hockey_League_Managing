@@ -76,7 +76,7 @@ void Creation::club(LigueHockey ligue){
         stade = ligue.getstades().back();
     }
 
-    Club* club = new Club(histoire,couleur,tm,NULL,NULL,stade,ville,adresse,NULL,entraineur);
+    Club* club = new Club(histoire,couleur,localdate,stade,ville,adresse,entraineur);
 
     std::cout<<"Voulez vous ajouter des joueurs? Entrer le nombre de joueurs\n";
     int nb_joueur;
@@ -96,12 +96,12 @@ void Creation::club(LigueHockey ligue){
     }
     
     std::cout<<"Voulez vous ajouter des palmares? Entrer le nombre de palmares\n";
-    std::cout<<"Attention, les palmares seront aussi associé à l'entraineur\n"
+    std::cout<<"Attention, les palmares seront aussi associé à l'entraineur\n";
     int nb_palmares;
     std::cin>>nb_palmares;
     for(int i=0;i<nb_palmares;i++){
         std::cout<<"Création du "<< i+1 <<" palmares :\n";
-        club->ajout_palmares(Creation::palmares());
+        club->ajout_Palmares(Creation::palmares());
     }
 
     ligue.addclub(club);
@@ -109,7 +109,7 @@ void Creation::club(LigueHockey ligue){
 
 }
 
-Entraineur* Creation::entraineur(LigueHockey ligue){
+void Creation::entraineur(LigueHockey ligue){
     std::string name;
     std::string surname;
     std::string lieu_grade;
@@ -308,7 +308,7 @@ Club* Traitement::clubTitre(LigueHockey ligue){
      if(ligue.getclubs().size==0){
         return NULL;
     }
-    else
+    else{
         Club* maxclub = ligue.getclubs()[0];
         for(int i=1;i<ligue.getclubs().size;i++){
             if(ligue.getclubs()[i]->getPalmares().size < maxclub->getPalmares().size){

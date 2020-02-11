@@ -12,7 +12,7 @@ class LigueHockey{
     
     public:
         LigueHockey();
-        LigueHockey(std::vector<Club*>,std::vector<Stade*>,std::vecotr<Entraineur*>);
+        LigueHockey(std::vector<Club*>,std::vector<Stade*>,std::vector<Entraineur*>);
         ~LigueHockey();
 
         void addclub(Club*);

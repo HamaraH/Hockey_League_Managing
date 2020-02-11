@@ -21,7 +21,32 @@ using namespace std;
 
     }
 
-    Club::~Club(){}
+    Club::Club(std::string histoire, std::string couleur,std::tm, Stade* stade, std::string ville, std::string adresse, Entraineur* entraineur){
+        this->histoire=histoire;
+        this->couleur=couleur;
+        this->date=date;
+        this->stade=stade;
+        this->ville = ville;
+        this->adresse = adresse;
+        this->entraineur = entraineur;
+    }
+
+
+    Club::~Club(){
+        //palmares, joueur, Personne
+        while(!this->getListeJoueurs().empty){
+            this->getListeJoueurs()[this->getListeJoueurs().size -1]->~Joueur();
+            this->getListeJoueurs().pop_back();
+        }
+        while(!this->getPalmares().empty){
+            this->getPalmares()[this->getPalmares().size-1]->~Palmares();
+            this->getPalmares().pop_back();
+        }
+        while(!this->getStaffTechnique().empty){
+            this->getStaffTechnique()[this->getStaffTechnique().size-1]->~Personne();
+            this->getStaffTechnique().pop_back();
+        }
+    }
 
 
     void Club::ajout_Palmares(Palmares* palmares){
