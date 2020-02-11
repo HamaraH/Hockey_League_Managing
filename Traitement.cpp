@@ -252,34 +252,34 @@ tm Creation::date(){
 
 
 void Afficher::club (Club* club){
-    printf("Club de %s à l'adresse %s\n",club->getVille(),club->getAdresse());
+    printf("Club de %s à l'adresse %s\n",club->getVille().c_str(),club->getAdresse().c_str());
 }
 void Afficher::entraineur(Entraineur* entraineur){
-    printf("%s %s\n",entraineur->getNom(),entraineur->getPrenom());
+    printf("%s %s\n",entraineur->getNom().c_str(),entraineur->getPrenom().c_str());
 
 }
 void Afficher::joueur(Joueur* joueur){
-    printf( "%s %s de %s\n",joueur->getNom(),joueur->getPrenom(),joueur->getVille());
+    printf( "%s %s de %s\n",joueur->getNom().c_str(),joueur->getPrenom().c_str(),joueur->getVille().c_str());
 
 }
 void Afficher::palmares(Palmares* palmares){
-    printf("%s du %d/%d/%d\n",palmares->getTitre(),palmares->getDate().tm_year+1900,palmares->getDate().tm_mon+1,palmares->getDate().tm_mday);
+    printf("%s du %d/%d/%d\n",palmares->getTitre().c_str(),palmares->getDate().tm_year+1900,palmares->getDate().tm_mon+1,palmares->getDate().tm_mday);
 
 }
 void Afficher::parcours(Parcours* parcours){
-    printf("%s le %d/%d/%d\n",parcours->getNomClub(),parcours->getDate().tm_year+1900,parcours->getDate().tm_mon+1,parcours->getDate().tm_mday);
+    printf("%s le %d/%d/%d\n",parcours->getNomClub().c_str(),parcours->getDate().tm_year+1900,parcours->getDate().tm_mon+1,parcours->getDate().tm_mday);
 
 }
 void Afficher::personne(Personne* personne){
-    printf("%s : %s\n",personne->getNom(), personne->getRole());
+    printf("%s : %s\n",personne->getNom().c_str(), personne->getRole().c_str());
 
 }
 void Afficher::stade(Stade* stade){
-    printf("%s au %s\n",stade->getNom(),stade->getAdresse());
+    printf("%s au %s\n",stade->getNom().c_str(),stade->getAdresse().c_str());
 
 }
 void Afficher::titre_gagne(Titre_gagne* titre_gagne){
-    printf("%s au club de la ville de %s\n",titre_gagne->getPalmares()->getTitre(),titre_gagne->getClub()->getVille());
+    printf("%s au club de la ville de %s\n",titre_gagne->getPalmares()->getTitre().c_str(),titre_gagne->getClub()->getVille().c_str());
 
 }
 void Afficher::joueurduclub(Club* club){
