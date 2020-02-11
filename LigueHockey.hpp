@@ -1,7 +1,7 @@
 #ifndef LIGUEHOCKEY_H
 #define LIGUEHOCKEY_H
 
-#include "Club.hpp"
+#include "Entraineur.hpp"
 
 class LigueHockey{
     

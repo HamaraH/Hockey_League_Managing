@@ -8,7 +8,7 @@
 #include "Palmares.hpp"
 #include "Stade.hpp"
 #include "Personne.hpp"
-#include "Entraineur.hpp"
+
 
 class Club{
 
@@ -23,13 +23,12 @@ class Club{
     std::string ville;
     std::string adresse;
     std::vector<Personne*> staff_technique;
-    Entraineur* entraineur;
 
     public:
 
     Club();
-    Club(std::string histoire, std::string couleur,std::tm,std::vector<Joueur*> liste, std::vector<Palmares*> palmares, Stade* stade, std::string ville, std::string adresse, std::vector<Personne*> staff_technique, Entraineur* entraineur);
-    Club(std::string histoire, std::string couleur,std::tm, Stade* stade, std::string ville, std::string adresse, Entraineur* entraineur);
+    Club(std::string histoire, std::string couleur,std::tm,std::vector<Joueur*> liste, std::vector<Palmares*> palmares, Stade* stade, std::string ville, std::string adresse, std::vector<Personne*> staff_technique);
+    Club(std::string histoire, std::string couleur,std::tm, Stade* stade, std::string ville, std::string adresse);
     ~Club();
     
     void ajout_Palmares(Palmares*);
@@ -64,8 +63,6 @@ class Club{
     void setStaffTechnique(std::vector<Personne*> staff_technique);
     std::vector<Personne*> getStaffTechnique();
 
-    void setentraineur(Entraineur*);
-    Entraineur* getentraineur();
 
 
 

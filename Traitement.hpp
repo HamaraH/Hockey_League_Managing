@@ -14,7 +14,8 @@ class Creation{
         static void club(LigueHockey);
         static void entraineur(LigueHockey);
         static Joueur* joueur();
-        static Palmares* palmares();
+        static void palmares(Club*,Entraineur*);
+        static void palmares(LigueHockey,Club*);
         static Parcours* parcours(); 
         static Personne* personne();
         static void stade(LigueHockey);

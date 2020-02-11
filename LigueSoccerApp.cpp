@@ -67,7 +67,7 @@ int main(int argc, const char* argv[]){
                         std::cout<<"Saisir le numéro du club voulu : ";
                         std::cin>>choixclub;
                     }while(choixclub<0||choixclub>ligue.getclubs().size());                    
-                    std::cout<<"1 : voir les joueurs \n 2 : supprimer le club \n autre : retour au début\n";
+                    std::cout<<"1 : voir les joueurs \n2 : ajouter un palmares \n3 : supprimer le club \n autre : retour au début\n";
                     int choixactionclub;
                     std::cin>>choixactionclub;
 
@@ -77,6 +77,9 @@ int main(int argc, const char* argv[]){
                             break;
                             }
                         case 2:{
+                            Creation::palmares(ligue,ligue.getclubs()[choixclub]);
+                        }
+                        case 3:{
                             ligue.getclubs()[choixclub]->~Club();
                             ligue.getclubs().erase(ligue.getclubs().begin()+choixclub-1);
                             break;

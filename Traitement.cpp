@@ -9,7 +9,6 @@ void Creation::club(LigueHockey ligue){
     std::string ville;
     std::string adresse;
     tm localdate;
-    Entraineur* entraineur;
     Stade* stade;
 
     std::cout<<"Saisir l'histoire du club : ";
@@ -22,34 +21,6 @@ void Creation::club(LigueHockey ligue){
     std::cin>>adresse;
     std::cout<<"Date de création du club : ";
     localdate = Creation::date();
-   
-    bool creation_entraineur = true;
-    if(ligue.getentraineurs().size()>0){
-        int choix;
-        std::cout<<"Taper 1 pour séléctionner un entraineur préexistant, sinon n'importe quel autre touche\n";
-        std::cin>>choix;
-        if(choix == 1){
-            creation_entraineur ==false;
-        }
-    }
-    if(creation_entraineur){
-        int choix;
-        for(int i=0;i<ligue.getentraineurs().size();i++){
-            std::cout<< i;
-            Afficher::entraineur(ligue.getentraineurs()[i]);
-        }
-        std::cout<<"Saisir le numéro de l'entraineur\n";
-        do{
-            std::cin>>choix;
-        }while(choix<0||choix>ligue.getentraineurs().size());
-        entraineur = ligue.getentraineurs()[choix];
-    }
-    else{
-        std::cout<<"Création d'un entraineur : ";
-        Creation::entraineur(ligue);
-        entraineur = ligue.getentraineurs().back();
-    }
-
     
     bool creation_stade = true;
     if(ligue.getstades().size()>0){
@@ -78,7 +49,7 @@ void Creation::club(LigueHockey ligue){
         stade = ligue.getstades().back();
     }
 
-    Club* club = new Club(histoire,couleur,localdate,stade,ville,adresse,entraineur);
+    Club* club = new Club(histoire,couleur,localdate,stade,ville,adresse);
 
     std::cout<<"Voulez vous ajouter des joueurs? Entrer le nombre de joueurs\n";
     int nb_joueur;
@@ -103,7 +74,7 @@ void Creation::club(LigueHockey ligue){
     std::cin>>nb_palmares;
     for(int i=0;i<nb_palmares;i++){
         std::cout<<"Création du "<< i+1 <<" palmares :\n";
-        club->ajout_Palmares(Creation::palmares());
+        Creation::palmares(ligue,club);
     }
 
     ligue.addclub(club);
@@ -155,13 +126,50 @@ Joueur* Creation::joueur(){//todo faire choix ajout parcours
     }
     return joueur;
 }
-Palmares* Creation::palmares(){
+void Creation::palmares(Club* club, Entraineur* entraineur){
     std::string titre;
 
     std::cout<<"Saisir le titre du palamares : ";
     std::cin>>titre;
 
-    return new Palmares(titre,Creation::date());
+    Palmares* palmares = new Palmares(titre,Creation::date());
+    club->ajout_Palmares(palmares);
+    entraineur->addtitre(new Titre_gagner(club,palmares));
+}
+
+void Creation::palmares(LigueHockey ligue,Club* club){
+    Entraineur* entraineur;
+
+    bool creation_entraineur = true;
+    if(ligue.getentraineurs().size()>0){
+        int choix;
+        std::cout<<"Taper 1 pour séléctionner un entraineur préexistant, sinon n'importe quel autre touche\n";
+        std::cin>>choix;
+        if(choix == 1){
+            creation_entraineur ==false;
+        }
+    }
+    if(creation_entraineur){
+        int choix;
+        for(int i=0;i<ligue.getentraineurs().size();i++){
+            std::cout<< i;
+            Afficher::entraineur(ligue.getentraineurs()[i]);
+        }
+        std::cout<<"Saisir le numéro de l'entraineur\n";
+        do{
+            std::cin>>choix;
+        }while(choix<0||choix>ligue.getentraineurs().size());
+        entraineur = ligue.getentraineurs()[choix];
+    }
+    else{
+        std::cout<<"Création d'un entraineur : ";
+        Creation::entraineur(ligue);
+        entraineur = ligue.getentraineurs().back();
+    }
+
+    Creation::palmares(club,entraineur);
+
+
 }
 
 Parcours* Creation::parcours(){

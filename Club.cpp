@@ -6,7 +6,7 @@ using namespace std;
 
     Club::Club(){}
 
-    Club::Club(string histoire, string couleur,std::tm date,vector<Joueur*> liste,std::vector<Palmares*> palmares,Stade* stade, string ville, string adresse,vector<Personne*> staff_technique, Entraineur* entraineur){
+    Club::Club(string histoire, string couleur,std::tm date,vector<Joueur*> liste,std::vector<Palmares*> palmares,Stade* stade, string ville, string adresse,vector<Personne*> staff_technique){
 
         this->histoire=histoire;
         this->couleur=couleur;
@@ -17,18 +17,15 @@ using namespace std;
         this->ville = ville;
         this->adresse = adresse;
         this->staff_technique = staff_technique;
-        this->entraineur = entraineur;
-
     }
 
-    Club::Club(std::string histoire, std::string couleur,std::tm, Stade* stade, std::string ville, std::string adresse, Entraineur* entraineur){
+    Club::Club(std::string histoire, std::string couleur,std::tm, Stade* stade, std::string ville, std::string adresse){
         this->histoire=histoire;
         this->couleur=couleur;
         this->date=date;
         this->stade=stade;
         this->ville = ville;
         this->adresse = adresse;
-        this->entraineur = entraineur;
     }
 
 
@@ -51,7 +48,6 @@ using namespace std;
 
     void Club::ajout_Palmares(Palmares* palmares){
         this->palmares.push_back(palmares);
-        this->entraineur->addtitre(new Titre_gagner(this,this->palmares.back()));
     }
 
     void Club::ajout_joueur(Joueur* joueur){
@@ -163,13 +159,6 @@ using namespace std;
        return this->staff_technique;
 
    }
-
-    void Club::setentraineur(Entraineur* entraineur){
-       this->entraineur=entraineur;
-    }
-    Entraineur* Club::getentraineur(){
-        return this->entraineur;
-    }
 
 
 
