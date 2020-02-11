@@ -21,18 +21,18 @@ class Entraineur{
     Entraineur(std::string,std::string,std::string,std::vector<Titre_gagne*>);
     ~Entraineur();
 
-    void addtitre(Titre_gagne*);
-    std::vector<Titre_gagne*> gettitre_club(Club* club);
-    std::vector<Titre_gagne*> gettitre_palmares(std::string);
+    void addTitre(Titre_gagne*);
+    std::vector<Titre_gagne*> getTitreClub(Club* club);
+    std::vector<Titre_gagne*> getTitrePalmares(std::string);
 
-    std::string getnom();
-    void setnom(std::string);
-    std::string getprenom();
-    void setprenom(std::string);
-    std::string getlieu_grade();
-    void setlieu_grade(std::string);
-    std::vector<Titre_gagne*> gettitres();
-    void settitres(std::vector<Titre_gagne*>);
+    std::string getNom();
+    void setNom(std::string);
+    std::string getPrenom();
+    void setPrenom(std::string);
+    std::string getLieuGrade();
+    void setLieuGrade(std::string);
+    std::vector<Titre_gagne*> getTitres();
+    void setTitres(std::vector<Titre_gagne*>);
 
 };
 

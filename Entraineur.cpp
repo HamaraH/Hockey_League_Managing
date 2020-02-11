@@ -12,12 +12,14 @@
         this->prenom =prenom;
         this->lieu_grade=lieu_grade;
     }
+
     Entraineur::Entraineur(std::string nom,std::string prenom,std::string lieu_grade,std::vector<Titre_gagne*> titres){
         this->nom=nom;
         this->prenom =prenom;
         this->lieu_grade=lieu_grade;
         this->titres=titres;
     }
+
     Entraineur::~Entraineur(){
         while(!this->titres.empty()){
             this->titres.back()->~Titre_gagne();
@@ -25,10 +27,11 @@
         }
     }
 
-    void Entraineur::addtitre(Titre_gagne* titre){
+    void Entraineur::addTitre(Titre_gagne* titre){
         this->titres.push_back(titre);
     }
-    std::vector<Titre_gagne*> Entraineur::gettitre_club(Club* club){
+
+    std::vector<Titre_gagne*> Entraineur::getTitreClub(Club* club){
         std::vector<Titre_gagne*> titre_du_club;
         for(int i=0;i<this->titres.size();i++){
             if(this->titres[i]->getClub()==club){
@@ -37,7 +40,8 @@
         }
         return titre_du_club;
     }
-    std::vector<Titre_gagne*> Entraineur::gettitre_palmares(std::string titre){
+
+    std::vector<Titre_gagne*> Entraineur::getTitrePalmares(std::string titre){
         std::vector<Titre_gagne*> titre_du_club;
         for(int i=0;i<this->titres.size();i++){
             if(this->titres[i]->getPalmares()->getTitre()==titre){
@@ -47,27 +51,34 @@
         return titre_du_club;
     }
 
-    std::string Entraineur::getnom(){
+    std::string Entraineur::getNom(){
         return this->nom;
     }
-    void Entraineur::setnom(std::string nom){
+
+    void Entraineur::setNom(std::string nom){
         this->nom=nom;
     }
-    std::string Entraineur::getprenom(){
+
+    std::string Entraineur::getPrenom(){
         return this->prenom;
     }
-    void Entraineur::setprenom(std::string prenom){
+
+    void Entraineur::setPrenom(std::string prenom){
         this->prenom=prenom;
     }
-    std::string Entraineur::getlieu_grade(){
+
+    std::string Entraineur::getLieuGrade(){
         return this->lieu_grade;
     }
-    void Entraineur::setlieu_grade(std::string lieu_grade){
+
+    void Entraineur::setLieuGrade(std::string lieu_grade){
         this->lieu_grade=lieu_grade;
     }
-    std::vector<Titre_gagne*> Entraineur::gettitres(){
+
+    std::vector<Titre_gagne*> Entraineur::getTitres(){
         return this->titres;
     }
-    void Entraineur::settitres(std::vector<Titre_gagne*> titres){
+
+    void Entraineur::setTitres(std::vector<Titre_gagne*> titres){
         this->titres=titres;
     }

@@ -139,7 +139,7 @@ void Creation::palmares(Club* club, Entraineur* entraineur){
 
     Palmares* palmares = new Palmares(titre,Creation::date());
     club->ajout_Palmares(palmares);
-    entraineur->addtitre(new Titre_gagne(club,palmares));
+    entraineur->addTitre(new Titre_gagne(club,palmares));
 }
 
 void Creation::palmares(LigueHockey* ligue,Club* club){
@@ -255,7 +255,7 @@ void Afficher::club (Club* club){
     printf("Club de %s à l'adresse %s\n",club->getVille(),club->getAdresse());
 }
 void Afficher::entraineur(Entraineur* entraineur){
-    printf("%s %s\n",entraineur->getnom(),entraineur->getprenom());
+    printf("%s %s\n",entraineur->getNom(),entraineur->getPrenom());
 
 }
 void Afficher::joueur(Joueur* joueur){
@@ -313,7 +313,7 @@ Entraineur* Traitement::entraineurTitre(LigueHockey* ligue){
     else{
         Entraineur* maxtitre = ligue->getentraineurs()[0];
         for(int i=1;i<ligue->getentraineurs().size();i++){
-            if(ligue->getentraineurs()[i]->gettitres().size() < maxtitre->gettitres().size()){
+            if(ligue->getentraineurs()[i]->getTitres().size() < maxtitre->getTitres().size()){
                 maxtitre = ligue->getentraineurs()[i];
             }
 
