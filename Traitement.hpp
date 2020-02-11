@@ -11,14 +11,14 @@ class Creation{
 
     public:
 
-        static void club(LigueHockey);
-        static void entraineur(LigueHockey);
+        static void club(LigueHockey*);
+        static void entraineur(LigueHockey*);
         static Joueur* joueur();
         static void palmares(Club*,Entraineur*);
-        static void palmares(LigueHockey,Club*);
+        static void palmares(LigueHockey*,Club*);
         static Parcours* parcours(); 
         static Personne* personne();
-        static void stade(LigueHockey);
+        static void stade(LigueHockey*);
         static tm date();
 
 };
@@ -34,7 +34,7 @@ class Afficher{
         static void parcours(Parcours*);
         static void personne(Personne*);
         static void stade(Stade*);
-        static void titre_gagner(Titre_gagner*);
+        static void titre_gagne(Titre_gagne*);
         static void joueurduclub(Club*);
 
 };
@@ -43,8 +43,8 @@ class Traitement{
 
     public:
 
-        static Entraineur* entraineurTitre(LigueHockey);
-        static Club* clubTitre(LigueHockey);
+        static Entraineur* entraineurTitre(LigueHockey*);
+        static Club* clubTitre(LigueHockey*);
 
 };
 

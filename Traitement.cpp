@@ -1,8 +1,9 @@
 #include "Traitement.hpp"
 #include <iostream>
+#include <stdio.h>
 
 
-void Creation::club(LigueHockey ligue){
+void Creation::club(LigueHockey* ligue){
 
     std::string histoire;
     std::string couleur;
@@ -11,90 +12,91 @@ void Creation::club(LigueHockey ligue){
     tm localdate;
     Stade* stade;
 
-    std::cout<<"Saisir l'histoire du club : ";
+    
+    
+    printf("Saisir l'histoire du club : ");
     std::cin>>histoire;
-    std::cout<<"Saisir la couleur du club : ";
-    std::cin>>couleur;
-    std::cout<<"Saisir la ville du club : ";
-    std::cin>>ville;
-    std::cout<<"Saisir l'adresse du club : ";
-    std::cin>>adresse;
-    std::cout<<"Date de création du club : ";
+    getline(std::cin,histoire);
+    printf("\nSaisir la couleur du club : ");
+    getline(std::cin,couleur);
+    printf("\nSaisir la ville du club : ");
+    getline(std::cin,ville);
+    printf("\nSaisir l'adresse du club : ");
+    getline(std::cin,adresse);
+    printf("\nDate de création du club : ");
     localdate = Creation::date();
     
     bool creation_stade = true;
-    if(ligue.getstades().size()>0){
+    if(ligue->getstades().size()>0){
         int choix;
-        std::cout<<"Taper 1 pour séléctionner un stade préexistant, sinon n'importe quel autre touche\n";
+        printf("\nTaper 1 pour selectionner un stade préexistant, sinon appuyez sur n'importe quelle autre touche\n");
         std::cin>>choix;
         if(choix == 1){
             creation_stade ==false;
         }
     }
-    if(creation_stade){
+    if(!creation_stade){
         int choix;
-        for(int i=0;i<ligue.getstades().size();i++){
-            std::cout<< i ;
-            Afficher::stade(ligue.getstades()[i]);
+        for(int i=0;i<ligue->getstades().size();i++){
+            printf( "%d",i) ;
+            Afficher::stade(ligue->getstades()[i]);
         }
-        std::cout<<"Saisir le numéro du stade\n";
+        printf("Saisir le numéro du stade\n");
         do{
             std::cin>>choix;
-        }while(choix<0||choix>ligue.getstades().size());
-        stade = ligue.getstades()[choix];
+        }while(choix<0||choix>ligue->getstades().size());
+        stade = ligue->getstades()[choix];
     }
     else{
-        std::cout<<"Création d'un stade : ";
+        printf("Création d'un stade : \n");
         Creation::stade(ligue);
-        stade = ligue.getstades().back();
+        stade = ligue->getstades().back();
     }
-
     Club* club = new Club(histoire,couleur,localdate,stade,ville,adresse);
-
-    std::cout<<"Voulez vous ajouter des joueurs? Entrer le nombre de joueurs\n";
+    printf("Voulez vous ajouter des joueurs? Veuillez entrer le nombre de joueurs\n");
     int nb_joueur;
     std::cin>>nb_joueur;
     for(int i=0;i<nb_joueur;i++){
-        std::cout<<"Création du joueur "<<i+1<<" :\n";
+        printf("Création du joueur %d :\n",i+1);
         club->ajout_joueur(Creation::joueur());
     }
 
 
-    std::cout<<"Voulez vous ajouter du staff technique? Entrer le nombre de personne\n";
+    printf("Voulez-vous ajouter du staff technique? Veuillez entrer le nombre de personne\n");
     int nb_staff;
     std::cin>>nb_staff;
     for(int i=0;i<nb_staff;i++){
-        std::cout<<"Création de la "<< i+1 <<" personne :\n";
+        printf("Création de la %d personne :\n",i+1);
         club->ajout_personne(Creation::personne());
     }
     
-    std::cout<<"Voulez vous ajouter des palmares? Entrer le nombre de palmares\n";
-    std::cout<<"Attention, les palmares seront aussi associé à l'entraineur\n";
+    printf("Voulez-vous ajouter des palmares? Veuillez entrer le nombre de palmares\n");
     int nb_palmares;
     std::cin>>nb_palmares;
     for(int i=0;i<nb_palmares;i++){
-        std::cout<<"Création du "<< i+1 <<" palmares :\n";
+        printf("Création du %d palmares :\n",i+1);
         Creation::palmares(ligue,club);
     }
 
-    ligue.addclub(club);
+    ligue->addclub(club);
 
 
 }
 
-void Creation::entraineur(LigueHockey ligue){
+void Creation::entraineur(LigueHockey* ligue){
     std::string name;
     std::string surname;
     std::string lieu_grade;
     
-    std::cout<<"Saisir le nom de l'entraineur : ";
+    printf("Saisir le nom de l'entraineur : \n");
     std::cin>>name;
-    std::cout<<"Saisir le prenom de l'entraineur : ";
-    std::cin>>surname;
-    std::cout<<"Saisir le lieu de grade : ";
-    std::cin>>lieu_grade;
+    getline(std::cin,name);
+    printf("Saisir le prenom de l'entraineur : \n");
+    getline(std::cin,surname);
+    printf("Saisir le lieu de grade : \n");
+    getline(std::cin,lieu_grade);
     
-    ligue.addentaineur(new Entraineur(name, surname,lieu_grade));
+    ligue->addentaineur(new Entraineur(name, surname,lieu_grade));
 }    
 Joueur* Creation::joueur(){//todo faire choix ajout parcours
     std::string name;
@@ -104,24 +106,26 @@ Joueur* Creation::joueur(){//todo faire choix ajout parcours
     std::string ville;
     Joueur* joueur;
 
-    std::cout<<"Saisir le nom du joueur : ";
+    printf("Saisir le nom du joueur : \n");
     std::cin>>name;
-    std::cout<<"Saisir le prenom du joueur  : ";
-    std::cin>>surname;
-    std::cout<<"Saisir la taille du joueur : ";
+    getline(std::cin,name);
+    printf("Saisir le prenom du joueur  : \n");
+    getline(std::cin,surname);
+    printf("Saisir la taille du joueur : \n");
     std::cin>>taille;
-    std::cout<<"Saisir le poid du joueur : ";
+    printf("Saisir le poids du joueur : \n");
     std::cin>>poid;
-    std::cout<<"Saisir la ville du joueur : ";
+    printf("Saisir la ville du joueur : \n");
     std::cin>>ville;
+    getline(std::cin,ville);
 
     joueur = new Joueur(name,surname,taille,poid,ville);
 
-    std::cout<<"Voulez vous ajouter du parcours? Entrer le nombre de parcours\n";
+    printf("Voulez vous ajouter des parcours? Entrer le nombre de parcours\n");
     int nb_parcours;
     std::cin>>nb_parcours;
     for(int i=0;i<nb_parcours;i++){
-        std::cout<<"Création du parcours"<< i+1 <<" :\n";
+        printf("Création du parcours %d :\n",i+1);
         joueur->ajout_parcours(Creation::parcours());
     }
     return joueur;
@@ -129,42 +133,43 @@ Joueur* Creation::joueur(){//todo faire choix ajout parcours
 void Creation::palmares(Club* club, Entraineur* entraineur){
     std::string titre;
 
-    std::cout<<"Saisir le titre du palamares : ";
+    printf("Saisir le titre du palamares : \n");
     std::cin>>titre;
+    getline(std::cin,titre);
 
     Palmares* palmares = new Palmares(titre,Creation::date());
     club->ajout_Palmares(palmares);
-    entraineur->addtitre(new Titre_gagner(club,palmares));
+    entraineur->addtitre(new Titre_gagne(club,palmares));
 }
 
-void Creation::palmares(LigueHockey ligue,Club* club){
+void Creation::palmares(LigueHockey* ligue,Club* club){
     Entraineur* entraineur;
 
     bool creation_entraineur = true;
-    if(ligue.getentraineurs().size()>0){
+    if(ligue->getentraineurs().size()>0){
         int choix;
-        std::cout<<"Taper 1 pour séléctionner un entraineur préexistant, sinon n'importe quel autre touche\n";
+        printf("Taper 1 pour selectionner un entraineur préexistant, sinon appuyez sur n'importe quelle autre touche\n");
         std::cin>>choix;
         if(choix == 1){
             creation_entraineur ==false;
         }
     }
-    if(creation_entraineur){
+    if(!creation_entraineur){
         int choix;
-        for(int i=0;i<ligue.getentraineurs().size();i++){
-            std::cout<< i;
-            Afficher::entraineur(ligue.getentraineurs()[i]);
+        for(int i=0;i<ligue->getentraineurs().size();i++){
+            printf( "%d",i);
+            Afficher::entraineur(ligue->getentraineurs()[i]);
         }
-        std::cout<<"Saisir le numéro de l'entraineur\n";
+        printf("Saisir le numéro de l'entraineur\n");
         do{
             std::cin>>choix;
-        }while(choix<0||choix>ligue.getentraineurs().size());
-        entraineur = ligue.getentraineurs()[choix];
+        }while(choix<0||choix>ligue->getentraineurs().size());
+        entraineur = ligue->getentraineurs()[choix];
     }
     else{
-        std::cout<<"Création d'un entraineur : ";
+        printf("Création d'un entraineur : \n");
         Creation::entraineur(ligue);
-        entraineur = ligue.getentraineurs().back();
+        entraineur = ligue->getentraineurs().back();
     }
 
     Creation::palmares(club,entraineur);
@@ -175,8 +180,9 @@ void Creation::palmares(LigueHockey ligue,Club* club){
 Parcours* Creation::parcours(){
     std::string nom_club;
 
-    std::cout<<"Saisir le nom du club : ";
+    printf("Saisir le nom du club : \n");
     std::cin>>nom_club;
+    getline(std::cin,nom_club);
 
     return new Parcours(nom_club,Creation::date());
 }
@@ -184,31 +190,34 @@ Personne* Creation::personne(){
     std::string nom;
     int age;
     std::string fonction;
-    std::cout<<"Saisir le nom de la personne : ";
+    printf("Saisir le nom de la personne : \n");
     std::cin>>nom;
-    std::cout<<"Saisir l'age de la personne : ";
+    getline(std::cin,nom);
+    printf("Saisir l'age de la personne : \n");
     std::cin>>age;
-    std::cout<<"Saisier la fonction de la personne : ";
+    printf("Saisier la fonction de la personne : \n");
     std::cin>>fonction;
+    getline(std::cin,fonction);
 
     return new Personne(nom, age, fonction);
 }
-void Creation::stade(LigueHockey ligue){
+void Creation::stade(LigueHockey* ligue){
     int capacite;
     std::string qualite;
     std::string nom;
     std::string adresse;
 
-    std::cout<<"Saisir la capacité du stade : ";
+    printf("Saisir la capacité du stade : \n");
     std::cin>>capacite;
-    std::cout<<"Saisir la quatité du stade : ";
+    printf("Saisir la quatité du stade : \n");
     std::cin>>qualite;
-    std::cout<<"Saisir le nom du stade : ";
-    std::cin>>nom;
-    std::cout<<"Saisir l'adresse du stade : ";
-    std::cin>>adresse;
+    getline(std::cin,qualite);
+    printf("Saisir le nom du stade : \n");
+    getline(std::cin,nom);
+    printf("Saisir l'adresse du stade : \n");
+    getline(std::cin,adresse);
 
-    ligue.addstade(new Stade(capacite, qualite, nom, adresse));
+    ligue->addstade(new Stade(capacite, qualite, nom, adresse));
 
 }
 
@@ -219,7 +228,7 @@ tm Creation::date(){
     bool bonformat;
     do{
          bonformat=true;
-        std::cout<<"Saisir la date au format AAAA/MM/DD : ";
+        printf("Saisir la date au format AAAA/MM/DD : \n");
         std::cin>>date;
         try{
             year = std::stoi(date.substr(0,4));
@@ -243,34 +252,34 @@ tm Creation::date(){
 
 
 void Afficher::club (Club* club){
-    std::cout<<"Club de "<< club->getVille() << " à l'adresse " << club->getAdresse() << "\n";
+    printf("Club de %s à l'adresse %s\n",club->getVille(),club->getAdresse());
 }
 void Afficher::entraineur(Entraineur* entraineur){
-    std::cout<<entraineur->getnom()<<" "<<entraineur->getprenom()<<" ";
+    printf("%s %s\n",entraineur->getnom(),entraineur->getprenom());
 
 }
 void Afficher::joueur(Joueur* joueur){
-    std::cout<< joueur->getNom()<<" "<< joueur->getPrenom()<< " de "<< joueur->getVille()<<"\n";
+    printf( "%s %s de %s\n",joueur->getNom(),joueur->getPrenom(),joueur->getVille());
 
 }
 void Afficher::palmares(Palmares* palmares){
-    std::cout<<palmares->getTitre()<<" du "<< palmares->getDate().tm_year+1900<<"/"<<palmares->getDate().tm_mon+1<<"/"<<palmares->getDate().tm_mday<<"\n";
+    printf("%s du %d/%d/%d\n",palmares->getTitre(),palmares->getDate().tm_year+1900,palmares->getDate().tm_mon+1,palmares->getDate().tm_mday);
 
 }
 void Afficher::parcours(Parcours* parcours){
-    std::cout<<parcours->getNomClub()<<" le "<<parcours->getDate().tm_year+1900<<"/"<<parcours->getDate().tm_mon+1<<"/"<<parcours->getDate().tm_mday<<"\n";
+    printf("%s le %d/%d/%d\n",parcours->getNomClub(),parcours->getDate().tm_year+1900,parcours->getDate().tm_mon+1,parcours->getDate().tm_mday);
 
 }
 void Afficher::personne(Personne* personne){
-    std::cout<<personne->getNom()<<" : "<< personne->getRole()<<"\n";
+    printf("%s : %s\n",personne->getNom(), personne->getRole());
 
 }
 void Afficher::stade(Stade* stade){
-    std::cout<<stade->getNom()<<" au "<<stade->getAdresse()<<"\n";
+    printf("%s au %s\n",stade->getNom(),stade->getAdresse());
 
 }
-void Afficher::titre_gagner(Titre_gagner* titre_gagner){
-    std::cout<<titre_gagner->getpalmares()->getTitre()<< " au club de la ville de "<< titre_gagner->getclub()->getVille()<<"\n";
+void Afficher::titre_gagne(Titre_gagne* titre_gagne){
+    printf("%s au club de la ville de %s\n",titre_gagne->getPalmares()->getTitre(),titre_gagne->getClub()->getVille());
 
 }
 void Afficher::joueurduclub(Club* club){
@@ -297,15 +306,15 @@ void Afficher::joueurduclub(Club* club){
 
 
 
-Entraineur* Traitement::entraineurTitre(LigueHockey ligue){
-    if(ligue.getentraineurs().size()==0){
+Entraineur* Traitement::entraineurTitre(LigueHockey* ligue){
+    if(ligue->getentraineurs().size()==0){
         return NULL;
     }
     else{
-        Entraineur* maxtitre = ligue.getentraineurs()[0];
-        for(int i=1;i<ligue.getentraineurs().size();i++){
-            if(ligue.getentraineurs()[i]->gettitres().size() < maxtitre->gettitres().size()){
-                maxtitre = ligue.getentraineurs()[i];
+        Entraineur* maxtitre = ligue->getentraineurs()[0];
+        for(int i=1;i<ligue->getentraineurs().size();i++){
+            if(ligue->getentraineurs()[i]->gettitres().size() < maxtitre->gettitres().size()){
+                maxtitre = ligue->getentraineurs()[i];
             }
 
         }
@@ -314,15 +323,15 @@ Entraineur* Traitement::entraineurTitre(LigueHockey ligue){
 }    
 
 
-Club* Traitement::clubTitre(LigueHockey ligue){
-     if(ligue.getclubs().size()==0){
+Club* Traitement::clubTitre(LigueHockey* ligue){
+     if(ligue->getclubs().size()==0){
         return NULL;
     }
     else{
-        Club* maxclub = ligue.getclubs()[0];
-        for(int i=1;i<ligue.getclubs().size();i++){
-            if(ligue.getclubs()[i]->getPalmares().size() < maxclub->getPalmares().size()){
-                maxclub = ligue.getclubs()[i];
+        Club* maxclub = ligue->getclubs()[0];
+        for(int i=1;i<ligue->getclubs().size();i++){
+            if(ligue->getclubs()[i]->getPalmares().size() < maxclub->getPalmares().size()){
+                maxclub = ligue->getclubs()[i];
             }
 
         }

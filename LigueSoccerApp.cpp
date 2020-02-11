@@ -9,7 +9,7 @@ int main(int argc, const char* argv[]){
 
     do{
         int choix;
-        std::cout<<"Appuyez sur 1 pour créer un club, 2 un entraineur, 3 un stade\n";
+        std::cout<<"Appuyez sur 1 pour creer un club, 2 un entraineur, 3 un stade\n";
         
         if(ligue.getentraineurs().size()>0){
             std::cout<<"Apuyez sur 4 pour voir l'entraineur avec le plus de palmares\n";
@@ -17,40 +17,40 @@ int main(int argc, const char* argv[]){
 
         if(ligue.getclubs().size()>0){
             std::cout<<"Appuyez sur 5 pour voir le club avec le plus gros palmares\n";
-            std::cout<<"Appuyez sur 6 pour sélectionner un club\n";
+            std::cout<<"Appuyez sur 6 pour selectionner un club\n";
         }
 
-        std::cout<<"Appuyez sur un autre nombre supérieur à 6 pour sortir\n"; 
+        std::cout<<"Appuyez sur un autre nombre superieur à 6 pour sortir\n"; 
 
         std::cin>>choix;
 
         switch(choix){
 
             case 1:{
-                Creation::club(ligue);
+                Creation::club(&ligue);
                 break;
                 }
 
             case 2:{
-                Creation::entraineur(ligue);
+                Creation::entraineur(&ligue);
                 break;
             }
 
             case 3:{
-                Creation::stade(ligue);
+                Creation::stade(&ligue);
                 break;
             }
 
             case 4:{
                 if(ligue.getentraineurs().size()>0){
-                    Afficher::entraineur(Traitement::entraineurTitre(ligue));
+                    Afficher::entraineur(Traitement::entraineurTitre(&ligue));
                     break;
                 }
             }
 
             case 5:{
                 if(ligue.getclubs().size()>0){
-                    Afficher::club(Traitement::clubTitre(ligue));
+                    Afficher::club(Traitement::clubTitre(&ligue));
                     break;
                 }
 
@@ -77,7 +77,7 @@ int main(int argc, const char* argv[]){
                             break;
                             }
                         case 2:{
-                            Creation::palmares(ligue,ligue.getclubs()[choixclub]);
+                            Creation::palmares(&ligue,ligue.getclubs()[choixclub]);
                         }
                         case 3:{
                             ligue.getclubs()[choixclub]->~Club();
