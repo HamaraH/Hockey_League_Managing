@@ -24,7 +24,7 @@ void Creation::club(LigueHockey ligue){
     localdate = Creation::date();
    
     bool creation_entraineur = true;
-    if(ligue.getentraineurs().size>0){
+    if(ligue.getentraineurs().size()>0){
         int choix;
         std::cout<<"Taper 1 pour séléctionner un entraineur préexistant, sinon n'importe quel autre touche\n";
         std::cin>>choix;
@@ -34,13 +34,14 @@ void Creation::club(LigueHockey ligue){
     }
     if(creation_entraineur){
         int choix;
-        for(int i=0;i<ligue.getentraineurs().size;i++){
-            std::cout<< i << Afficher::entraineur(ligue.getentraineurs()[i]) << "\n";
+        for(int i=0;i<ligue.getentraineurs().size();i++){
+            std::cout<< i;
+            Afficher::entraineur(ligue.getentraineurs()[i]);
         }
         std::cout<<"Saisir le numéro de l'entraineur\n";
         do{
             std::cin>>choix;
-        }while(choix<0||choix>ligue.getentraineurs().size);
+        }while(choix<0||choix>ligue.getentraineurs().size());
         entraineur = ligue.getentraineurs()[choix];
     }
     else{
@@ -51,7 +52,7 @@ void Creation::club(LigueHockey ligue){
 
     
     bool creation_stade = true;
-    if(ligue.getstades().size>0){
+    if(ligue.getstades().size()>0){
         int choix;
         std::cout<<"Taper 1 pour séléctionner un stade préexistant, sinon n'importe quel autre touche\n";
         std::cin>>choix;
@@ -61,13 +62,14 @@ void Creation::club(LigueHockey ligue){
     }
     if(creation_stade){
         int choix;
-        for(int i=0;i<ligue.getstades().size;i++){
-            std::cout<< i << Afficher::stade(ligue.getstades()[i]) << "\n";
+        for(int i=0;i<ligue.getstades().size();i++){
+            std::cout<< i ;
+            Afficher::stade(ligue.getstades()[i]);
         }
         std::cout<<"Saisir le numéro du stade\n";
         do{
             std::cin>>choix;
-        }while(choix<0||choix>ligue.getstades().size);
+        }while(choix<0||choix>ligue.getstades().size());
         stade = ligue.getstades()[choix];
     }
     else{
@@ -264,7 +266,7 @@ void Afficher::titre_gagner(Titre_gagner* titre_gagner){
 
 }
 void Afficher::joueurduclub(Club* club){
-    for(int i=0;i<club->getListeJoueurs().size;i++){
+    for(int i=0;i<club->getListeJoueurs().size();i++){
         Afficher::joueur(club->getListeJoueurs()[i]);
     }
 }
@@ -288,13 +290,13 @@ void Afficher::joueurduclub(Club* club){
 
 
 Entraineur* Traitement::entraineurTitre(LigueHockey ligue){
-    if(ligue.getentraineurs().size==0){
+    if(ligue.getentraineurs().size()==0){
         return NULL;
     }
     else{
         Entraineur* maxtitre = ligue.getentraineurs()[0];
-        for(int i=1;i<ligue.getentraineurs().size;i++){
-            if(ligue.getentraineurs()[i]->gettitres().size < maxtitre->gettitres().size){
+        for(int i=1;i<ligue.getentraineurs().size();i++){
+            if(ligue.getentraineurs()[i]->gettitres().size() < maxtitre->gettitres().size()){
                 maxtitre = ligue.getentraineurs()[i];
             }
 
@@ -305,13 +307,13 @@ Entraineur* Traitement::entraineurTitre(LigueHockey ligue){
 
 
 Club* Traitement::clubTitre(LigueHockey ligue){
-     if(ligue.getclubs().size==0){
+     if(ligue.getclubs().size()==0){
         return NULL;
     }
     else{
         Club* maxclub = ligue.getclubs()[0];
-        for(int i=1;i<ligue.getclubs().size;i++){
-            if(ligue.getclubs()[i]->getPalmares().size < maxclub->getPalmares().size){
+        for(int i=1;i<ligue.getclubs().size();i++){
+            if(ligue.getclubs()[i]->getPalmares().size() < maxclub->getPalmares().size()){
                 maxclub = ligue.getclubs()[i];
             }
 

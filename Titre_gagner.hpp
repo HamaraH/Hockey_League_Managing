@@ -17,7 +17,7 @@ class Titre_gagner{
         ~Titre_gagner();
 
         Club* getclub();
-        void setclub(Club*);
+        void setclub(Club* club);
         Palmares* getpalmares();
         void setpalmares(Palmares*);
 

@@ -34,16 +34,16 @@ using namespace std;
 
     Club::~Club(){
         //palmares, joueur, Personne
-        while(!this->getListeJoueurs().empty){
-            this->getListeJoueurs()[this->getListeJoueurs().size -1]->~Joueur();
+        while(!this->getListeJoueurs().empty()){
+            this->getListeJoueurs()[this->getListeJoueurs().size() -1]->~Joueur();
             this->getListeJoueurs().pop_back();
         }
-        while(!this->getPalmares().empty){
-            this->getPalmares()[this->getPalmares().size-1]->~Palmares();
+        while(!this->getPalmares().empty()){
+            this->getPalmares()[this->getPalmares().size()-1]->~Palmares();
             this->getPalmares().pop_back();
         }
-        while(!this->getStaffTechnique().empty){
-            this->getStaffTechnique()[this->getStaffTechnique().size-1]->~Personne();
+        while(!this->getStaffTechnique().empty()){
+            this->getStaffTechnique()[this->getStaffTechnique().size()-1]->~Personne();
             this->getStaffTechnique().pop_back();
         }
     }

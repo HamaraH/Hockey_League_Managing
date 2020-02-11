@@ -1,8 +1,10 @@
 #ifndef ENTRAINEUR_H
-#define ENTRAIEUR_H
+#define ENTRAINEUR_H
 
 
 #include "Titre_gagner.hpp"
+#include <vector>
+#include <string>
 
 class Entraineur{
 
@@ -20,7 +22,7 @@ class Entraineur{
     ~Entraineur();
 
     void addtitre(Titre_gagner*);
-    std::vector<Titre_gagner*> gettitre_club(Club*);
+    std::vector<Titre_gagner*> gettitre_club(Club* club);
     std::vector<Titre_gagner*> gettitre_palmares(std::string);
 
     std::string getnom();

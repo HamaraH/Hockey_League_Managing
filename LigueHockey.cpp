@@ -2,7 +2,7 @@
         LigueHockey::LigueHockey(){
         }
 
-        LigueHockey::LigueHockey(std::vector<Clubscore*> clubs, std::vecotr<Stade*> stades, std::vector<Entraineur*> entraineurs){
+        LigueHockey::LigueHockey(std::vector<Club*> clubs, std::vector<Stade*> stades, std::vector<Entraineur*> entraineurs){
             this->clubs=clubs;
             this->stades=stades;
             this->entraineurs=entraineurs;
@@ -11,20 +11,20 @@
         LigueHockey::~LigueHockey(){
         }
 
-        void LigueHockey::addclub(Clubscore* club){
+        void LigueHockey::addclub(Club* club){
             this->clubs.push_back(club);
         }
         void LigueHockey::addstade(Stade* stade){
             this->stades.push_back(stade);
         }
-        void LigueHockey::addentaineur(Entraineur* entraienur){
+        void LigueHockey::addentaineur(Entraineur* entraineur){
             this->entraineurs.push_back(entraineur);
         }
 
-        std::vector<Clubscore*> LigueHockey::getclubs(){
+        std::vector<Club*> LigueHockey::getclubs(){
             return this->clubs;
         }
-        void LigueHockey::setclubs(std::vector<Clubscore*> club){
+        void LigueHockey::setclubs(std::vector<Club*> club){
             this->clubs=clubs;
         }
         std::vector<Stade*> LigueHockey::getstades(){

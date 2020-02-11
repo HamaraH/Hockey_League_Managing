@@ -37,3 +37,4 @@ void Parcours::setDate(std::tm date){
 
     this->date = date;
 }
+    
