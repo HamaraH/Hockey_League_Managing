@@ -30,19 +30,20 @@ using namespace std;
 
 
     Club::~Club(){
-        //palmares, joueur, Personne
-        while(!this->getListeJoueurs().empty()){
+        
+        for(int i=1;i<this->getListeJoueurs().size();i++){
             this->getListeJoueurs()[this->getListeJoueurs().size() -1]->~Joueur();
             this->getListeJoueurs().pop_back();
         }
-        while(!this->getPalmares().empty()){
+        for(int i=1;i<this->getPalmares().size();i++){
             this->getPalmares()[this->getPalmares().size()-1]->~Palmares();
             this->getPalmares().pop_back();
         }
-        while(!this->getStaffTechnique().empty()){
+        for(int i=1;i<this->getStaffTechnique().size();i++){
             this->getStaffTechnique()[this->getStaffTechnique().size()-1]->~Personne();
             this->getStaffTechnique().pop_back();
         }
+        std::cout<<"fin staff\n";
     }
 
 

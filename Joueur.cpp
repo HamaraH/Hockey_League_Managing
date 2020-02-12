@@ -15,12 +15,12 @@ using namespace std;
     }
 
     Joueur::Joueur(string nom, string prenom, float taille, float poids, string ville, std::vector<Parcours*> parcours){
-    this->Nom = nom;
-    this->Prenom = prenom;
-    this->Taille = taille;
-    this->Poids = poids;
-    this->Ville = ville;
-    this->parcours=parcours;
+        this->Nom = nom;
+        this->Prenom = prenom;
+        this->Taille = taille;
+        this->Poids = poids;
+        this->Ville = ville;
+        this->parcours=parcours;
     }
 
     Joueur::~Joueur(){}

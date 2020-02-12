@@ -18,7 +18,8 @@ class LigueHockey{
         void addclub(Club*);
         void addstade(Stade*);
         void addentaineur(Entraineur*);
-        
+        void destroy(int);
+
         std::vector<Club*> getclubs();
         void setclubs(std::vector<Club*>);
         std::vector<Stade*> getstades();

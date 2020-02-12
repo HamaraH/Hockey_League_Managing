@@ -21,6 +21,12 @@
             this->entraineurs.push_back(entraineur);
         }
 
+        void LigueHockey::destroy(int choix){
+            this->clubs.erase(this->clubs.begin()+choix);
+        }
+
+
+
         std::vector<Club*> LigueHockey::getclubs(){
             return this->clubs;
         }

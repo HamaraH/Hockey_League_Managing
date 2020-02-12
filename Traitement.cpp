@@ -23,13 +23,13 @@ void Creation::club(LigueHockey* ligue){
     getline(std::cin,ville);
     printf("\nSaisir l'adresse du club : ");
     getline(std::cin,adresse);
-    printf("\nDate de création du club : ");
+    printf("\nDate de creation du club : ");
     localdate = Creation::date();
     
     bool creation_stade = true;
     if(ligue->getstades().size()>0){
         int choix;
-        printf("\nTaper 1 pour selectionner un stade préexistant, sinon appuyez sur n'importe quelle autre touche\n");
+        printf("\nTapez 1 pour selectionner un stade preexistant, sinon appuyez sur n'importe quel autre chiffre\n");
         std::cin>>choix;
         if(choix == 1){
             creation_stade ==false;
@@ -41,14 +41,14 @@ void Creation::club(LigueHockey* ligue){
             printf( "%d",i) ;
             Afficher::stade(ligue->getstades()[i]);
         }
-        printf("Saisir le numéro du stade\n");
+        printf("Saisir le numero du stade\n");
         do{
             std::cin>>choix;
         }while(choix<0||choix>ligue->getstades().size());
         stade = ligue->getstades()[choix];
     }
     else{
-        printf("Création d'un stade : \n");
+        printf("\nCreation d'un stade : \n");
         Creation::stade(ligue);
         stade = ligue->getstades().back();
     }
@@ -57,7 +57,7 @@ void Creation::club(LigueHockey* ligue){
     int nb_joueur;
     std::cin>>nb_joueur;
     for(int i=0;i<nb_joueur;i++){
-        printf("Création du joueur %d :\n",i+1);
+        printf("Creation du joueur %d :\n",i+1);
         club->ajout_joueur(Creation::joueur());
     }
 
@@ -66,7 +66,7 @@ void Creation::club(LigueHockey* ligue){
     int nb_staff;
     std::cin>>nb_staff;
     for(int i=0;i<nb_staff;i++){
-        printf("Création de la %d personne :\n",i+1);
+        printf("Creation de la %d personne :\n",i+1);
         club->ajout_personne(Creation::personne());
     }
     
@@ -74,7 +74,7 @@ void Creation::club(LigueHockey* ligue){
     int nb_palmares;
     std::cin>>nb_palmares;
     for(int i=0;i<nb_palmares;i++){
-        printf("Création du %d palmares :\n",i+1);
+        printf("Creation du %d palmares :\n",i+1);
         Creation::palmares(ligue,club);
     }
 
@@ -98,26 +98,26 @@ void Creation::entraineur(LigueHockey* ligue){
     
     ligue->addentaineur(new Entraineur(name, surname,lieu_grade));
 }    
-Joueur* Creation::joueur(){//todo faire choix ajout parcours
+Joueur* Creation::joueur(){
     std::string name;
     std::string surname;
     float taille;
     float poid;
     std::string ville;
     Joueur* joueur;
-
+    std::string debug;
+    getline(std::cin,debug);
     printf("Saisir le nom du joueur : \n");
-    std::cin>>name;
     getline(std::cin,name);
     printf("Saisir le prenom du joueur  : \n");
     getline(std::cin,surname);
+    printf("Saisir la ville du joueur : \n");
+    getline(std::cin,ville);
     printf("Saisir la taille du joueur : \n");
     std::cin>>taille;
     printf("Saisir le poids du joueur : \n");
     std::cin>>poid;
-    printf("Saisir la ville du joueur : \n");
-    std::cin>>ville;
-    getline(std::cin,ville);
+    
 
     joueur = new Joueur(name,surname,taille,poid,ville);
 
@@ -125,7 +125,7 @@ Joueur* Creation::joueur(){//todo faire choix ajout parcours
     int nb_parcours;
     std::cin>>nb_parcours;
     for(int i=0;i<nb_parcours;i++){
-        printf("Création du parcours %d :\n",i+1);
+        printf("Creation du parcours %d :\n",i+1);
         joueur->ajout_parcours(Creation::parcours());
     }
     return joueur;
@@ -148,7 +148,7 @@ void Creation::palmares(LigueHockey* ligue,Club* club){
     bool creation_entraineur = true;
     if(ligue->getentraineurs().size()>0){
         int choix;
-        printf("Taper 1 pour selectionner un entraineur préexistant, sinon appuyez sur n'importe quelle autre touche\n");
+        printf("Taper 1 pour selectionner un entraineur preexistant, sinon appuyez sur n'importe quelle autre touche\n");
         std::cin>>choix;
         if(choix == 1){
             creation_entraineur ==false;
@@ -160,14 +160,14 @@ void Creation::palmares(LigueHockey* ligue,Club* club){
             printf( "%d",i);
             Afficher::entraineur(ligue->getentraineurs()[i]);
         }
-        printf("Saisir le numéro de l'entraineur\n");
+        printf("Saisir le numero de l'entraineur\n");
         do{
             std::cin>>choix;
         }while(choix<0||choix>ligue->getentraineurs().size());
         entraineur = ligue->getentraineurs()[choix];
     }
     else{
-        printf("Création d'un entraineur : \n");
+        printf("Creation d'un entraineur : \n");
         Creation::entraineur(ligue);
         entraineur = ligue->getentraineurs().back();
     }
@@ -195,7 +195,7 @@ Personne* Creation::personne(){
     getline(std::cin,nom);
     printf("Saisir l'age de la personne : \n");
     std::cin>>age;
-    printf("Saisier la fonction de la personne : \n");
+    printf("Saisir la fonction de la personne : \n");
     std::cin>>fonction;
     getline(std::cin,fonction);
 
@@ -207,9 +207,9 @@ void Creation::stade(LigueHockey* ligue){
     std::string nom;
     std::string adresse;
 
-    printf("Saisir la capacité du stade : \n");
+    printf("Saisir la capacite du stade : \n");
     std::cin>>capacite;
-    printf("Saisir la quatité du stade : \n");
+    printf("Saisir la qualite du stade : \n");
     std::cin>>qualite;
     getline(std::cin,qualite);
     printf("Saisir le nom du stade : \n");
@@ -252,13 +252,14 @@ tm Creation::date(){
 
 
 void Afficher::club (Club* club){
-    printf("Club de %s à l'adresse %s\n",club->getVille().c_str(),club->getAdresse().c_str());
+    printf("Club de %s a l'adresse %s\n",club->getVille().c_str(),club->getAdresse().c_str());
 }
 void Afficher::entraineur(Entraineur* entraineur){
     printf("%s %s\n",entraineur->getNom().c_str(),entraineur->getPrenom().c_str());
 
 }
 void Afficher::joueur(Joueur* joueur){
+
     printf( "%s %s de %s\n",joueur->getNom().c_str(),joueur->getPrenom().c_str(),joueur->getVille().c_str());
 
 }

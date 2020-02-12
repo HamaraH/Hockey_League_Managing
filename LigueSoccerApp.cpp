@@ -20,7 +20,7 @@ int main(int argc, const char* argv[]){
             std::cout<<"Appuyez sur 6 pour selectionner un club\n";
         }
 
-        std::cout<<"Appuyez sur un autre nombre superieur à 6 pour sortir\n"; 
+        std::cout<<"Appuyez sur un autre nombre superieur a 6 pour sortir\n"; 
 
         std::cin>>choix;
 
@@ -59,15 +59,15 @@ int main(int argc, const char* argv[]){
             case 6:{
                 if(ligue.getclubs().size()>0){
                     for(int i =0; i<ligue.getclubs().size();i++){
-                        std::cout<< i;
+                        std::cout<< "Numero du club :" << i << " ";
                         Afficher::club(ligue.getclubs()[i]);
                     }                    
                     int choixclub;
                     do{
-                        std::cout<<"Saisir le numéro du club voulu : ";
+                        std::cout<<"Saisir le numero du club voulu : ";
                         std::cin>>choixclub;
                     }while(choixclub<0||choixclub>ligue.getclubs().size());                    
-                    std::cout<<"1 : voir les joueurs \n2 : ajouter un palmares \n3 : supprimer le club \n autre : retour au début\n";
+                    std::cout<<"1 : voir les joueurs \n2 : ajouter un palmares \n3 : supprimer le club \n autre : retour au debut\n";
                     int choixactionclub;
                     std::cin>>choixactionclub;
 
@@ -78,10 +78,11 @@ int main(int argc, const char* argv[]){
                             }
                         case 2:{
                             Creation::palmares(&ligue,ligue.getclubs()[choixclub]);
+                            break;
                         }
                         case 3:{
                             ligue.getclubs()[choixclub]->~Club();
-                            ligue.getclubs().erase(ligue.getclubs().begin()+choixclub-1);
+                            ligue.destroy(choixclub);
                             break;
                         }
                     }
@@ -96,6 +97,5 @@ int main(int argc, const char* argv[]){
         }
 
     }while(!sortie);
-
     return 0;
 }
