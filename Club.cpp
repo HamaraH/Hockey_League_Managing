@@ -161,5 +161,16 @@ using namespace std;
 
    }
 
+   void Club::setListeTransfert(std::vector<Transfert*> liste_transfert){
+
+       this->listeTransfert = liste_transfert;
+   }
+
+   std::vector<Transfert*> Club::getListeTransfert(){
+
+       return this->listeTransfert;
+       
+   }
+
 
 

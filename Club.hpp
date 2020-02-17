@@ -8,6 +8,7 @@
 #include "Palmares.hpp"
 #include "Stade.hpp"
 #include "Personne.hpp"
+#include "Transfert.hpp"
 
 
 class Club{
@@ -23,6 +24,7 @@ class Club{
     std::string ville;
     std::string adresse;
     std::vector<Personne*> staff_technique;
+    std::vector<Transfert*> listeTransfert;
 
     public:
 
@@ -63,7 +65,8 @@ class Club{
     void setStaffTechnique(std::vector<Personne*> staff_technique);
     std::vector<Personne*> getStaffTechnique();
 
-
+    void setListeTransfert(std::vector<Transfert*> liste_transfert);
+    std::vector<Transfert*> getListeTransfert();
 
 
 };
