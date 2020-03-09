@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "Club.hpp"
+#include "..\HPP\Club.hpp"
 
 using namespace std;
 
