@@ -38,6 +38,9 @@ class Joueur : public Sportif{
     void setVille(std::string ville);
     std::string getVille();
     
+    void setParcours(std::vector<Parcours*>);
+    std::vector<Parcours*> getParcours();
+
     void toString();
     
 };
