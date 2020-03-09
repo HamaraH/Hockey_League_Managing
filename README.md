@@ -7,3 +7,6 @@ La commande pour compiler (sous Windows) est : g++ Club.cpp Entraineur.cpp Hocke
 Pour executer : LigueSoccerApp
 
 Test : g++ Club.cpp Entraineur.cpp Hockey.cpp Joueur.cpp LigueHockey.cpp Palmares.cpp Parcours.cpp Personne.cpp Stade.cpp Titre_gagne.cpp Traitement.cpp main.cpp Periode.cpp Match.cpp Reglement.cpp Resultat.cpp Sportif.cpp Contrat_engagement.cpp Contrat.cpp -o main
+
+-constructeurs avec héritage
+-destructeurs
