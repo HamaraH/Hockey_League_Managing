@@ -247,6 +247,98 @@ tm Creation::date(){
 
 
 
+void Creation::calendrierRencontre(LigueHockey* ligue){
+
+
+    int annee;
+
+    std::cout<<"entrer l'année du calendrier : ";
+    std::cin>>annee;
+
+    ligue->addcalendrier(new CalendierRencontre(annee));
+
+}
+
+Rencontre* Creation::rencontre(LigueHockey* ligue){
+
+    
+    tm date = Creation::date();
+
+    Club* club1= Traitement::chooseClub(ligue);
+    Club* club2;
+    do{
+        club2 = Traitement::chooseClub(ligue);
+    }while(club2==club1);
+
+    return new Rencontre(date,club1,club2);
+}
+
+Match Creation::match(Rencontre* rencontre){
+
+    Equipe* equipe1 = Creation::equipe(rencontre->getLocal());
+    Equipe* equipe2 = Creation::equipe(rencontre->getInvite());
+    std::vector<Periode*> periodes;
+    
+    std::cout<<"choisir le nombre de période : ";
+    int nbperiode;
+    std::cin>> nbperiode;
+
+    for(int i=0;i<nbperiode;i++){
+        periodes.push_back(Creation::periode());
+    }
+    return Match(equipe1,equipe2,periodes,Creation::resultat(periodes));
+
+}
+
+Periode* Creation::periode(){
+    int duree, nbButLocal, nbButinvite;
+    std::cout<<"Saisir la durée de la période : ";
+    std::cin>>duree;
+
+    std::cout<<"Saisir le nombre de but de l'équipe local : ";
+    std::cin>>nbButLocal;
+
+    std::cout<<"Saisir le nombre de bu de l'équipe invité : ";
+    std::cin>>nbButinvite;
+
+    return new Periode(duree,nbButLocal,nbButinvite);
+
+}
+
+Resultat* Creation::resultat(std::vector<Periode*> periodes){
+    int nbButlocal=0 ,nbButinvite=0;
+
+    for(int i=0;i<periodes.size();i++){
+        nbButlocal += periodes[i]->getNbButsLocale();
+        nbButinvite +=periodes[i]->getNbButsAdverse();
+    }
+    return new Resultat(nbButlocal,nbButinvite);
+}
+
+Equipe* Creation::equipe(Club* club){
+
+    int nbJoueur, nbGardien;
+    Joueur* capitaine;
+
+    std::cout<<"Saisir le nombre de joueurs : ";
+    std::cin>>nbJoueur;
+
+    std::cout<<"Saisir le nombre de guardiens : ";
+    std::cin>>nbGardien;
+
+    capitaine = Traitement::chooseJoueur(club);
+
+    return new Equipe(club,nbJoueur,nbGardien,capitaine);
+}
+
+
+        
+Contrat_engagement* Creation::contrat_engagement(){}
+
+Joueur_non_autonome* Creation::joueur_non_autonome(){}
+
+
+
 
 
 void Afficher::club (Club* club){
@@ -336,4 +428,34 @@ Club* Traitement::clubTitre(LigueHockey* ligue){
         }
         return maxclub;
     }
+}
+
+
+Club* Traitement::chooseClub(LigueHockey* ligue){
+    for(int i =0; i<ligue->getclubs().size();i++){
+        std::cout<< "Numero du club :" << i << " ";
+        Afficher::club(ligue->getclubs()[i]);
+    }                    
+    int choixclub;
+    do{
+        std::cout<<"Saisir le numero du club voulu : ";
+        std::cin>>choixclub;
+    }while(choixclub<0||choixclub>ligue->getclubs().size());
+
+    return ligue->getclubs()[choixclub];  
+}
+
+Joueur* Traitement::chooseJoueur(Club* club){
+    for(int i=0;i<club->getListeJoueurs().size();i++){
+        std::cout<<"Numero du joueur :"<<i<<" ";
+        Afficher::joueur(club->getListeJoueurs()[i]);
+    }
+    int choixJoueur;
+    do{
+        std::cout<<"Saisir le numero du joueur voulu : ";
+        std::cin>>choixJoueur;
+    }while(choixJoueur<0||choixJoueur>club->getListeJoueurs().size());
+
+    return club->getListeJoueurs()[choixJoueur];
+
 }

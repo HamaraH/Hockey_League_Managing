@@ -22,9 +22,19 @@
         void LigueHockey::addentaineur(Entraineur* entraineur){
             this->entraineurs.push_back(entraineur);
         }
+        void LigueHockey::addcalendrier(CalendierRencontre* calendrier){
+            this->calendriers.push_back(calendrier);
+        }
 
-        void LigueHockey::destroy(int choix){
-            this->clubs.erase(this->clubs.begin()+choix);
+
+        void LigueHockey::destroy(Club* choix){
+            for(int i=0;i<clubs.size();i++){
+                if(this->clubs[i]==choix){
+                    clubs[i]->~Club();
+                    this->clubs.erase(this->clubs.begin()+i);
+                    break;
+                }
+            }
         }
 
 
@@ -47,3 +57,19 @@
         void LigueHockey::setentraineurs(std::vector<Entraineur*> entraineurs){
             this->entraineurs = entraineurs;
         }
+
+        std::vector<CalendierRencontre*> LigueHockey::getCalendrier(){
+            return this->calendriers;
+        }
+        void LigueHockey::setCalendriers(std::vector<CalendierRencontre*> calendriers){
+            this->calendriers = calendriers;
+        }
+
+
+
+
+
+
+
+
+

@@ -59,31 +59,22 @@ int main(int argc, const char* argv[]){
 
             case 6:{
                 if(ligue.getclubs().size()>0){
-                    for(int i =0; i<ligue.getclubs().size();i++){
-                        std::cout<< "Numero du club :" << i << " ";
-                        Afficher::club(ligue.getclubs()[i]);
-                    }                    
-                    int choixclub;
-                    do{
-                        std::cout<<"Saisir le numero du club voulu : ";
-                        std::cin>>choixclub;
-                    }while(choixclub<0||choixclub>ligue.getclubs().size());                    
+                    Club* club = Traitement::chooseClub(&ligue);                   
                     std::cout<<"1 : voir les joueurs \n2 : ajouter un palmares \n3 : supprimer le club \n autre : retour au debut\n";
                     int choixactionclub;
                     std::cin>>choixactionclub;
 
                     switch(choixactionclub){
                         case 1:{
-                            Afficher::joueurduclub(ligue.getclubs()[choixclub]);
+                            Afficher::joueurduclub(club);
                             break;
                             }
                         case 2:{
-                            Creation::palmares(&ligue,ligue.getclubs()[choixclub]);
+                            Creation::palmares(&ligue,club);
                             break;
                         }
                         case 3:{
-                            ligue.getclubs()[choixclub]->~Club();
-                            ligue.destroy(choixclub);
+                            ligue.destroy(club);
                             break;
                         }
                     }
