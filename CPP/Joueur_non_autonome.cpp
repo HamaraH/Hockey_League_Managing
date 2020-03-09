@@ -5,7 +5,7 @@
 
 using namespace std;
 
-Joueur_non_autonome::Joueur_non_autonome(float taille, float poids, string ville , vector<Parcours*> parcours, int annee_min, std::string nom, std::string prenom){
+Joueur_non_autonome::Joueur_non_autonome(float taille, float poids, string ville , vector<Parcours*> parcours, int annee_min){
 
     this->setTaille(taille);
     this->setPoids(poids);

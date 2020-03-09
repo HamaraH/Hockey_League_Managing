@@ -333,69 +333,9 @@ Equipe* Creation::equipe(Club* club){
 
 
         
-Contrat_engagement* Creation::contrat_engagement(LigueHockey* ligue){
-    std::cout<<"Club de provenance\n";
-    Club* provenance = Traitement::chooseClub(ligue);
-    std::cout<<"Club de destination\n";
-    Club* destination = Traitement::chooseClub(ligue);
+Contrat_engagement* Creation::contrat_engagement(){}
 
-    Joueur* joueur = Traitement::chooseJoueur(provenance);
-
-    int duree;
-    std::cout<<"saisir la durée du contrat : ";
-    std::cin>>duree;
-
-    tm dateEntree, dateContrat;
-    std::cout<<"Saisir la date d'entrée : ";
-    dateEntree = Creation::date();
-
-    std::cout<<"Saisir la date du contrat : ";
-    dateContrat= Creation::date();
-
-    return new Contrat_engagement(destination,provenance,joueur,duree,dateEntree,Creation::reglement(),dateContrat);
-
-}
-
-Reglement* Creation::reglement(){
-
-    float seuil;
-    std::string descriptionDroits;
-    float montantTransfert;
-    float montantEncaisse;
-    float montantRestant;
-
-    std::cout<<"Saisir le seuil :";
-    std::cin>>seuil;
-
-    std::cout<<"Saisir la description des droits : ";
-    std::cin>>descriptionDroits;
-
-    std::cout<<"Saisir le montant du transfert : ";
-    std::cin>>montantTransfert;
-
-    std::cout<<"Saisir le montant encaissé : ";
-    std::cin>>montantEncaisse;
-
-    std::cout<<"Saisir le montant restant : ";
-    std::cin>>montantRestant;
-
-    return new Reglement(seuil,descriptionDroits,montantTransfert,montantEncaisse,montantRestant);
-
-}
-
-Joueur_non_autonome* Creation::joueur_non_autonome(){
-
-    Joueur* joueur = Creation::joueur();
-
-    int nbAnnee;
-
-    std::cout<<"Saisir le nombre d'année minimum dans le club : ";
-    std::cin>>nbAnnee;
-
-    Joueur_non_autonome* joueurna = new Joueur_non_autonome(joueur->getTaille(),joueur->getPoids(), joueur->getVille(),joueur->getParcours(),nbAnnee,joueur->getNom(), joueur->getPrenom());
-    joueur->~Joueur();
-    return joueurna;
-}
+Joueur_non_autonome* Creation::joueur_non_autonome(){}
 
 
 
@@ -439,40 +379,6 @@ void Afficher::joueurduclub(Club* club){
     }
 }
 
-void Afficher::calendrierRencontre(CalendierRencontre* calendrier){
-    for(int i=0;i<calendrier->getRencontres().size();i++){
-        Afficher::rencontre(calendrier->getRencontres()[i]);
-    }
-}
-void Afficher::rencontre(Rencontre* rencontre){
-    std::cout<<"Club de "<<rencontre->getLocal()->getVille()<<" vs Club de "<<rencontre->getInvite()->getVille()<<" le "<<rencontre->getDate().tm_year+1900<<"/"<<rencontre->getDate().tm_mon+1<<"/"<<rencontre->getDate().tm_mday<<"\n";
-}
-void Afficher::match(Match match){
-    std::cout<<match.getEquipeLocale()->getClub()->getVille()<< " contre "<<match.getEquipeInvitee()->getClub()->getVille()<<"\n";
-    Afficher::resultat(match.getResultatFinal);
-}
-void Afficher::resultat(Resultat* res){
-    std::cout<<res->getNbButsLocale()<<" à "<< res->getNbButsAdverse()<<"\n";
-}
-void Afficher::periode(Periode* perio){
-    std::cout<<perio->getNbButsLocale()<<" à "<<perio->getNbButsAdverse()<<" pour une durée de "<<perio->getDuree()<<"\n";
-}
-void Afficher::equipe(Equipe* equipe){
-    std::cout<<"Club de "<<equipe->getClub()->getVille()<<" dirigé par ";
-    Afficher::joueur(equipe->getCapitaineEquipe());
-}
-        
-void Afficher::contrat_engagement(Contrat_engagement* engagement){
-    std::cout<<"Club de "<<engagement->getClubLibere()->getVille()<<" à "<<engagement->getClubContractant()->getVille()<<" pour ";
-    Afficher::joueur(engagement->getJoueurContractant());
-
-}
-void Afficher::reglement(Reglement* reglement){
-
-    std::cout<<reglement->getMontantTransfert()<<" avec comme droit "<<reglement->getDescriptionDroits();
-
-}
-
 
 
 
@@ -498,7 +404,7 @@ Entraineur* Traitement::entraineurTitre(LigueHockey* ligue){
     else{
         Entraineur* maxtitre = ligue->getentraineurs()[0];
         for(int i=1;i<ligue->getentraineurs().size();i++){
-            if(ligue->getentraineurs()[i]->getTitres().size() > maxtitre->getTitres().size()){
+            if(ligue->getentraineurs()[i]->getTitres().size() < maxtitre->getTitres().size()){
                 maxtitre = ligue->getentraineurs()[i];
             }
 
@@ -515,7 +421,7 @@ Club* Traitement::clubTitre(LigueHockey* ligue){
     else{
         Club* maxclub = ligue->getclubs()[0];
         for(int i=1;i<ligue->getclubs().size();i++){
-            if(ligue->getclubs()[i]->getPalmares().size() > maxclub->getPalmares().size()){
+            if(ligue->getclubs()[i]->getPalmares().size() < maxclub->getPalmares().size()){
                 maxclub = ligue->getclubs()[i];
             }
 

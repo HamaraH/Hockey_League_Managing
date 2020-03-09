@@ -6,7 +6,7 @@ using namespace std;
 
     Club::Club(){}
 
-    Club::Club(string histoire, string couleur,std::tm date,vector<Joueur*> liste,std::vector<Palmares*> palmares,Stade* stade, string ville, string adresse,vector<Personne*> staff_technique, vector<Contrat*> listeTransfert){
+    Club::Club(string histoire, string couleur,tm date,vector<Joueur*> liste,vector<Palmares*> palmares,Stade* stade, string ville, string adresse,vector<Personne*> staff_technique, vector<Contrat*> listeTransfert){
         this->histoire=histoire;
         this->couleur=couleur;
         this->date=date;
@@ -19,7 +19,7 @@ using namespace std;
         this->listeTransfert = listeTransfert;
     }
 
-    Club::Club(std::string histoire, std::string couleur,std::tm, Stade* stade, std::string ville, std::string adresse){
+    Club::Club(string histoire, string couleur,tm, Stade* stade, string ville, string adresse){
         this->histoire=histoire;
         this->couleur=couleur;
         this->date=date;
@@ -43,7 +43,7 @@ using namespace std;
             this->getStaffTechnique()[this->getStaffTechnique().size()-1]->~Personne();
             this->getStaffTechnique().pop_back();
         }
-        std::cout<<"fin staff\n";
+        cout<<"fin staff\n";
     }
 
 
@@ -101,13 +101,13 @@ using namespace std;
         this->effectif = liste;
     }
     
-    std::vector<Palmares*> Club::getPalmares(){
+    vector<Palmares*> Club::getPalmares(){
 
         return this->palmares;
 
     }
 
-    void Club::setPalmares(std::vector<Palmares*> palma){
+    void Club::setPalmares(vector<Palmares*> palma){
 
         this->palmares = palma;
 
@@ -161,15 +161,27 @@ using namespace std;
 
    }
 
-    void Club::setListeTransfert(std::vector<Contrat*> liste_transfert){
+    void Club::setListeTransfert(vector<Contrat*> liste_transfert){
        this->listeTransfert = liste_transfert;
    }
 
-   std::vector<Contrat*> Club::getListeTransfert(){
+   vector<Contrat*> Club::getListeTransfert(){
 
        return this->listeTransfert;
        
    }
+
+    vector<Rupture*> Club::getListeRupture(){
+
+        return this->listeRupture;
+
+    }
+
+    void Club::setListeRupture(vector<Rupture*> liste){
+
+        this->listeRupture = liste;
+
+    }
 
 
 

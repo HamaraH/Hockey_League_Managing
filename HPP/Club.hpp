@@ -9,7 +9,7 @@
 #include "Stade.hpp"
 #include "Personne.hpp"
 #include "Contrat.hpp"
-
+#include "Rupture.hpp"
 
 class Club{
 
@@ -25,6 +25,7 @@ class Club{
     std::string adresse;
     std::vector<Personne*> staff_technique;
     std::vector<Contrat*> listeTransfert;
+    std::vector<Rupture*> listeRupture;
 
     public:
 
@@ -68,7 +69,8 @@ class Club{
     void setListeTransfert(std::vector<Contrat*> liste_transfert);
     std::vector<Contrat*> getListeTransfert();
 
-
+    std::vector<Rupture*> getListeRupture();
+    void setListeRupture(std::vector<Rupture*>);
 };
 
 #endif
