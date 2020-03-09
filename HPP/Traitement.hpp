@@ -31,7 +31,8 @@ class Creation{
         static Periode* periode();
         static Equipe* equipe(Club*);
         
-        static Contrat_engagement* contrat_engagement();
+        static Contrat_engagement* contrat_engagement(LigueHockey*);
+        static Reglement* reglement();
 
         static Joueur_non_autonome* joueur_non_autonome();
 
@@ -51,6 +52,18 @@ class Afficher{
         static void titre_gagne(Titre_gagne*);
         
         static void joueurduclub(Club*);
+
+        static void calendrierRencontre(CalendierRencontre*);
+        static void rencontre(Rencontre*);
+        static void match(Match);
+        static void resultat(Resultat*);
+        static void periode(Periode*);
+        static void equipe(Equipe*);
+        
+        static void contrat_engagement(Contrat_engagement*);
+        static void reglement(Reglement*);
+
+        static void joueur_non_autonome(Joueur_non_autonome*);
 
 };
 
