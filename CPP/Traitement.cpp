@@ -333,9 +333,69 @@ Equipe* Creation::equipe(Club* club){
 
 
         
-Contrat_engagement* Creation::contrat_engagement(){}
+Contrat_engagement* Creation::contrat_engagement(LigueHockey* ligue){
+    std::cout<<"Club de provenance\n";
+    Club* provenance = Traitement::chooseClub(ligue);
+    std::cout<<"Club de destination\n";
+    Club* destination = Traitement::chooseClub(ligue);
 
-Joueur_non_autonome* Creation::joueur_non_autonome(){}
+    Joueur* joueur = Traitement::chooseJoueur(provenance);
+
+    int duree;
+    std::cout<<"saisir la durée du contrat : ";
+    std::cin>>duree;
+
+    tm dateEntree, dateContrat;
+    std::cout<<"Saisir la date d'entrée : ";
+    dateEntree = Creation::date();
+
+    std::cout<<"Saisir la date du contrat : ";
+    dateContrat= Creation::date();
+
+    return new Contrat_engagement(destination,provenance,joueur,duree,dateEntree,Creation::reglement(),dateContrat);
+
+}
+
+Reglement* Creation::reglement(){
+
+    float seuil;
+    std::string descriptionDroits;
+    float montantTransfert;
+    float montantEncaisse;
+    float montantRestant;
+
+    std::cout<<"Saisir le seuil :";
+    std::cin>>seuil;
+
+    std::cout<<"Saisir la description des droits : ";
+    std::cin>>descriptionDroits;
+
+    std::cout<<"Saisir le montant du transfert : ";
+    std::cin>>montantTransfert;
+
+    std::cout<<"Saisir le montant encaissé : ";
+    std::cin>>montantEncaisse;
+
+    std::cout<<"Saisir le montant restant : ";
+    std::cin>>montantRestant;
+
+    return new Reglement(seuil,descriptionDroits,montantTransfert,montantEncaisse,montantRestant);
+
+}
+
+Joueur_non_autonome* Creation::joueur_non_autonome(){
+
+    Joueur* joueur = Creation::joueur();
+
+    int nbAnnee;
+
+    std::cout<<"Saisir le nombre d'année minimum dans le club : ";
+    std::cin>>nbAnnee;
+
+    Joueur_non_autonome* joueurna = new Joueur_non_autonome(joueur->getTaille(),joueur->getPoids(), joueur->getVille(),joueur->getParcours(),nbAnnee,joueur->getNom(), joueur->getPrenom());
+    joueur->~Joueur();
+    return joueurna;
+}
 
 
 
@@ -379,7 +439,25 @@ void Afficher::joueurduclub(Club* club){
     }
 }
 
+void Afficher::calendrierRencontre(CalendierRencontre* calendrier){
+    for(int i=0;i<calendrier->getRencontres().size();i++){
+        Afficher::rencontre(calendrier->getRencontres()[i]);
+    }
+}
+void Afficher::rencontre(Rencontre* rencontre){
+    std::cout<<"Club de "<<rencontre->getLocal()->getVille()<<" vs Club de "<<rencontre->getInvite()->getVille()<<" le "<<rencontre->getDate().tm_year+1900<<"/"<<rencontre->getDate().tm_mon+1<<"/"<<rencontre->getDate().tm_mday<<"\n";
+}
+void Afficher::match(Match){
+    
+}
+void Afficher::resultat(Resultat*){}
+void Afficher::periode(Periode*){}
+void Afficher::equipe(Equipe*){}
+        
+void Afficher::contrat_engagement(Contrat_engagement*){}
+void Afficher::reglement(Reglement*){}
 
+void Afficher::joueur_non_autonome(Joueur_non_autonome*){}
 
 
 
