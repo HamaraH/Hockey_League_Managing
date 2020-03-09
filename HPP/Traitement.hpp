@@ -63,7 +63,6 @@ class Afficher{
         static void contrat_engagement(Contrat_engagement*);
         static void reglement(Reglement*);
 
-        static void joueur_non_autonome(Joueur_non_autonome*);
 
 };
 
