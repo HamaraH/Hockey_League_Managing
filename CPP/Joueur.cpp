@@ -9,7 +9,7 @@ using namespace std;
     Joueur::Joueur(){}
 
 
-    Joueur::Joueur(std::string nom, std::string prenom, float taille, float poids, string ville, std::vector<Parcours*> parcours):Sportif(nom,prenom){
+    Joueur::Joueur(string nom, string prenom, float taille, float poids, string ville, vector<Parcours*> parcours):Sportif(nom,prenom){
         
         this->Taille = taille;
         this->Poids = poids;
@@ -18,7 +18,7 @@ using namespace std;
 
     }
 
-    Joueur::Joueur(std::string nom, std::string prenom, float taille, float poids, std::string ville){
+    Joueur::Joueur(string nom, string prenom, float taille, float poids, string ville){
 
         this->setNom(nom);
         this->setPrenom(prenom);
@@ -75,4 +75,16 @@ using namespace std;
     void Joueur::toString(){
         cout<< "Nom : " << this->getNom() << "\nPrenom : " 
         << this->getPrenom() << "\nTaille : " << this->getTaille() << "m\nPoids : " << this->getPoids() << "kg\nVille : " << this->getVille() << "\n\n";
+    }
+
+    vector<Parcours*> Joueur::getParcours(){
+
+        return this->parcours;
+
+    }
+
+    void Joueur::setParcours(vector<Parcours*> p){
+
+        this->parcours = p;
+
     }

@@ -23,7 +23,7 @@ int main(){
 
     c1->setListeTransfert(v1);
 
-    cout<<c1->getListeTransfert().at(0)->getDureeContrat();
+     Contrat_engagement* v = (Contrat_engagement*) c1->getListeTransfert().at(0);
 
     return 0;
 
