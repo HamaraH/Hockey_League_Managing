@@ -1,4 +1,4 @@
-#include "CalendrierRencontre.hpp"
+#include "..\HPP\CalendrierRencontre.hpp"
 
 CalendierRencontre::CalendierRencontre(){}
 CalendierRencontre::CalendierRencontre(int annee){
