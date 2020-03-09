@@ -333,9 +333,69 @@ Equipe* Creation::equipe(Club* club){
 
 
         
-Contrat_engagement* Creation::contrat_engagement(){}
+Contrat_engagement* Creation::contrat_engagement(LigueHockey* ligue){
+    std::cout<<"Club de provenance\n";
+    Club* provenance = Traitement::chooseClub(ligue);
+    std::cout<<"Club de destination\n";
+    Club* destination = Traitement::chooseClub(ligue);
 
-Joueur_non_autonome* Creation::joueur_non_autonome(){}
+    Joueur* joueur = Traitement::chooseJoueur(provenance);
+
+    int duree;
+    std::cout<<"saisir la durée du contrat : ";
+    std::cin>>duree;
+
+    tm dateEntree, dateContrat;
+    std::cout<<"Saisir la date d'entrée : ";
+    dateEntree = Creation::date();
+
+    std::cout<<"Saisir la date du contrat : ";
+    dateContrat= Creation::date();
+
+    return new Contrat_engagement(destination,provenance,joueur,duree,dateEntree,Creation::reglement(),dateContrat);
+
+}
+
+Reglement* Creation::reglement(){
+
+    float seuil;
+    std::string descriptionDroits;
+    float montantTransfert;
+    float montantEncaisse;
+    float montantRestant;
+
+    std::cout<<"Saisir le seuil :";
+    std::cin>>seuil;
+
+    std::cout<<"Saisir la description des droits : ";
+    std::cin>>descriptionDroits;
+
+    std::cout<<"Saisir le montant du transfert : ";
+    std::cin>>montantTransfert;
+
+    std::cout<<"Saisir le montant encaissé : ";
+    std::cin>>montantEncaisse;
+
+    std::cout<<"Saisir le montant restant : ";
+    std::cin>>montantRestant;
+
+    return new Reglement(seuil,descriptionDroits,montantTransfert,montantEncaisse,montantRestant);
+
+}
+
+Joueur_non_autonome* Creation::joueur_non_autonome(){
+
+    Joueur* joueur = Creation::joueur();
+
+    int nbAnnee;
+
+    std::cout<<"Saisir le nombre d'année minimum dans le club : ";
+    std::cin>>nbAnnee;
+
+    Joueur_non_autonome* joueurna = new Joueur_non_autonome(joueur->getTaille(),joueur->getPoids(), joueur->getVille(),joueur->getParcours(),nbAnnee,joueur->getNom(), joueur->getPrenom());
+    joueur->~Joueur();
+    return joueurna;
+}
 
 
 
@@ -379,6 +439,38 @@ void Afficher::joueurduclub(Club* club){
     }
 }
 
+void Afficher::calendrierRencontre(CalendierRencontre* calendrier){
+    std::cout<<"Calendrier de l'année "<<calendrier->getAnnee()<<"\n";
+}
+void Afficher::rencontre(Rencontre* rencontre){
+    std::cout<<"Club de "<<rencontre->getLocal()->getVille()<<" vs Club de "<<rencontre->getInvite()->getVille()<<" le "<<rencontre->getDate().tm_year+1900<<"/"<<rencontre->getDate().tm_mon+1<<"/"<<rencontre->getDate().tm_mday<<"\n";
+}
+void Afficher::match(Match match){
+    std::cout<<match.getEquipeLocale()->getClub()->getVille()<< " contre "<<match.getEquipeInvitee()->getClub()->getVille()<<"\n";
+    Afficher::resultat(match.getResultatFinal);
+}
+void Afficher::resultat(Resultat* res){
+    std::cout<<res->getNbButsLocale()<<" à "<< res->getNbButsAdverse()<<"\n";
+}
+void Afficher::periode(Periode* perio){
+    std::cout<<perio->getNbButsLocale()<<" à "<<perio->getNbButsAdverse()<<" pour une durée de "<<perio->getDuree()<<"\n";
+}
+void Afficher::equipe(Equipe* equipe){
+    std::cout<<"Club de "<<equipe->getClub()->getVille()<<" dirigé par ";
+    Afficher::joueur(equipe->getCapitaineEquipe());
+}
+        
+void Afficher::contrat_engagement(Contrat_engagement* engagement){
+    std::cout<<"Club de "<<engagement->getClubLibere()->getVille()<<" à "<<engagement->getClubContractant()->getVille()<<" pour ";
+    Afficher::joueur(engagement->getJoueurContractant());
+
+}
+void Afficher::reglement(Reglement* reglement){
+
+    std::cout<<reglement->getMontantTransfert()<<" avec comme droit "<<reglement->getDescriptionDroits();
+
+}
+
 
 
 
@@ -404,7 +496,7 @@ Entraineur* Traitement::entraineurTitre(LigueHockey* ligue){
     else{
         Entraineur* maxtitre = ligue->getentraineurs()[0];
         for(int i=1;i<ligue->getentraineurs().size();i++){
-            if(ligue->getentraineurs()[i]->getTitres().size() < maxtitre->getTitres().size()){
+            if(ligue->getentraineurs()[i]->getTitres().size() > maxtitre->getTitres().size()){
                 maxtitre = ligue->getentraineurs()[i];
             }
 
@@ -421,7 +513,7 @@ Club* Traitement::clubTitre(LigueHockey* ligue){
     else{
         Club* maxclub = ligue->getclubs()[0];
         for(int i=1;i<ligue->getclubs().size();i++){
-            if(ligue->getclubs()[i]->getPalmares().size() < maxclub->getPalmares().size()){
+            if(ligue->getclubs()[i]->getPalmares().size() > maxclub->getPalmares().size()){
                 maxclub = ligue->getclubs()[i];
             }
 
@@ -440,7 +532,7 @@ Club* Traitement::chooseClub(LigueHockey* ligue){
     do{
         std::cout<<"Saisir le numero du club voulu : ";
         std::cin>>choixclub;
-    }while(choixclub<0||choixclub>ligue->getclubs().size());
+    }while(choixclub<0||choixclub>=ligue->getclubs().size());
 
     return ligue->getclubs()[choixclub];  
 }
@@ -454,8 +546,176 @@ Joueur* Traitement::chooseJoueur(Club* club){
     do{
         std::cout<<"Saisir le numero du joueur voulu : ";
         std::cin>>choixJoueur;
-    }while(choixJoueur<0||choixJoueur>club->getListeJoueurs().size());
+    }while(choixJoueur<0||choixJoueur>=club->getListeJoueurs().size());
 
     return club->getListeJoueurs()[choixJoueur];
 
+}
+
+
+CalendierRencontre* Traitement::chooseCalendrier(LigueHockey* ligue){
+    for(int i=0;i<ligue->getCalendrier().size();i++){
+        std::cout<<"Numéro du calendrier :"<<i<<" ";
+        Afficher::calendrierRencontre(ligue->getCalendrier()[i]);
+    }
+    int choixCalendrier;
+    do{
+        std::cout<<"Saisir le numéro du calendrier voulu : ";
+        std::cin>>choixCalendrier;
+    }while(choixCalendrier<0||choixCalendrier>=ligue->getCalendrier().size());
+
+    return ligue->getCalendrier()[choixCalendrier];
+}
+
+Rencontre* chooseRencontre(CalendierRencontre* calendrier){
+    for (int i=0;i<calendrier->getRencontres().size();i++){
+        std::cout<<"Numéro de la rendontre :"<<i<<" ";
+        Afficher::rencontre(calendrier->getRencontres()[i]);
+    }
+    int choixRencontre;
+    do{
+        std::cout<<"Saisir le numéro de la rencontre voulu : ";
+        std::cin>>choixRencontre;
+    }while(choixRencontre<0||choixRencontre>=calendrier->getRencontres().size());
+    return calendrier->getRencontres()[choixRencontre];
+}
+
+
+
+
+
+
+
+
+int Traitement::ApplicationBody(){
+    
+    LigueHockey ligue;
+    bool sortie =false;
+
+    std::cout<<"Bienvenue dans l'application de gestion de club de Hockey\n";
+
+    do{
+        int choix;
+        std::cout<<"Appuyez sur 1 pour creer un club, 2 un entraineur, 3 un stade\n";
+        
+        if(ligue.getentraineurs().size()>0){
+            std::cout<<"Apuyez sur 4 pour voir l'entraineur avec le plus de palmares\n";
+        }
+
+        if(ligue.getclubs().size()>0){
+            std::cout<<"Appuyez sur 5 pour voir le club avec le plus gros palmares\n";
+            std::cout<<"Appuyez sur 6 pour selectionner un club\n";
+        }
+
+        std::cout<<"Appuyez sur 7 pour créer un calendrier de rencontre\n";
+        if(ligue.getCalendrier().size()>0){
+            std::cout<<"Appuyez sur 8 pour sélectionner un calendrier";
+        }
+
+        std::cout<<"Appuyez sur un autre nombre superieur a X pour sortir\n"; 
+
+        std::cin>>choix;
+
+        switch(choix){
+
+            case 1:{
+                Creation::club(&ligue);
+                break;
+            }
+
+            case 2:{
+                Creation::entraineur(&ligue);
+                break;
+            }
+
+            case 3:{
+                Creation::stade(&ligue);
+                break;
+            }
+
+            case 4:{
+                if(ligue.getentraineurs().size()>0){
+                    Afficher::entraineur(Traitement::entraineurTitre(&ligue));
+                }
+                break;
+            }
+
+            case 5:{
+                if(ligue.getclubs().size()>0){
+                    Afficher::club(Traitement::clubTitre(&ligue));
+                }
+                break;
+
+            }
+
+            case 6:{
+                    if(ligue.getclubs().size()>0){
+                        Club* club = Traitement::chooseClub(&ligue);                   
+                        std::cout<<"1 : voir les joueurs \n2 : ajouter un palmares \n3 : supprimer le club \n autre : retour au debut\n";
+                        int choixactionclub;
+                        std::cin>>choixactionclub;
+
+                        switch(choixactionclub){
+                            case 1:{
+                                Afficher::joueurduclub(club);
+                                break;
+                                }
+                            case 2:{
+                                Creation::palmares(&ligue,club);
+                                break;
+                            }
+                            case 3:{
+                                ligue.destroy(club);
+                                break;
+                            }
+                        }
+                    }
+                    break;
+                }
+
+            case 7:{
+                    Creation::calendrierRencontre(&ligue);
+                    break;
+                }
+            case 8:{
+                    if(ligue.getCalendrier().size()>0){
+                        CalendierRencontre* calendrier = Traitement::chooseCalendrier(&ligue);
+                        int choixCalendrier;
+
+                        std::cout<<"Saisir 1 pour créer une rencontre\n";
+                        std::cout<<"Saisir 2 pour créer une rencontre\n";
+                        if(calendrier->getRencontres().size()>0){
+                            std::cout<<"Saisir 3 pour selectionner une rencontre\n";
+                        }
+                        std::cout<<"Saisir un autre nombre pour revenir en arrière\n";
+                        std::cin>>choixCalendrier;
+
+                        switch(choixCalendrier){
+                            case 1:{
+
+                            }
+                            case 2:{
+
+                            }
+                            case 3:{
+
+                            }
+                        }
+                        
+                    }
+                    break;
+                }
+            
+            
+            
+            
+            
+            default:{
+                sortie = true;
+                break;
+            }
+        }
+
+    }while(!sortie);
+    return 0;
 }
