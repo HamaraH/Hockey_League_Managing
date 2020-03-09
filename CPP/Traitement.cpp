@@ -116,9 +116,17 @@ Joueur* Creation::joueur(){
     printf("Saisir le poids du joueur : \n");
     std::cin>>poids;
     
-
-    joueur = new Joueur(name,surname,taille,poids,ville);
-
+    int autonome;
+    std::cout<<"Le joueur est il autonome? (0 =non), autre = oui\n";
+    if(autonome ==0){
+        int nb_annee;
+        std::cout<<"Saisir le nombre d'année minimum de son contrat :\n";
+        std::cin>>nb_annee;
+        joueur = new Joueur_non_autonome(taille, poids,ville,nb_annee,name,surname);
+    }
+    else{
+        joueur = new Joueur(name,surname,taille,poids,ville);
+    }
     printf("Voulez vous ajouter des parcours? Entrer le nombre de parcours\n");
     int nb_parcours;
     std::cin>>nb_parcours;
@@ -261,6 +269,10 @@ void Creation::calendrierRencontre(LigueHockey* ligue){
 
 Rencontre* Creation::rencontre(LigueHockey* ligue){
 
+    while(ligue->getclubs().size()<2){
+        //tant qu'il n'y a pas deux clubs
+        Creation::club(ligue);
+    }
     
     tm date = Creation::date();
 
@@ -326,6 +338,9 @@ Equipe* Creation::equipe(Club* club){
     std::cout<<"Saisir le nombre de guardiens : ";
     std::cin>>nbGardien;
 
+    while(club->getListeJoueurs().size()<1){
+        club->ajout_joueur(Creation::joueur());
+    }
     capitaine = Traitement::chooseJoueur(club);
 
     return new Equipe(club,nbJoueur,nbGardien,capitaine);
@@ -472,8 +487,28 @@ void Afficher::reglement(Reglement* reglement){
 }
 
 
+void Afficher::RencontreClub(LigueHockey* ligue ,Club* club){
+
+    for(int i=0;i<ligue->getCalendrier().size();i++){
+        for(int j=0;j<ligue->getCalendrier()[i]->getRencontres().size();j++){
+            Afficher::rencontre(ligue->getCalendrier()[i]->getRencontres()[j]);
+        }
+    }
+}
 
 
+void Afficher::MontantEncaisse(Club* club){
+    std::cout<<"Saisir la date du debut du calcule\n";
+    tm date =Creation::date();
+    float montant=0;
+
+    for(int i=0;i<club->getListeTransfert().size();i++){
+        if( ((Contrat_engagement*)club->getListeTransfert()[i])->getClubLibere()==club){
+            montant += club->getListeTransfert()[i]->getReglement()->getMontantEncaisse();
+        }
+    }
+    std::cout<<" le montant encaissé est de "<<montant<<"\n";
+}
 
 
 
@@ -649,67 +684,100 @@ int Traitement::ApplicationBody(){
             }
 
             case 6:{
-                    if(ligue.getclubs().size()>0){
-                        Club* club = Traitement::chooseClub(&ligue);                   
-                        std::cout<<"1 : voir les joueurs \n2 : ajouter un palmares \n3 : supprimer le club \n autre : retour au debut\n";
-                        int choixactionclub;
-                        std::cin>>choixactionclub;
+                if(ligue.getclubs().size()>0){
+                    Club* club = Traitement::chooseClub(&ligue);                   
+                    std::cout<<"1 : voir les joueurs \n2 : ajouter un palmares \n3 : supprimer le club \n4 calendrier rencontre\n5 monatant des transfert encaissé\n autre : retour au debut\n";
+                    int choixactionclub;
+                    std::cin>>choixactionclub;
 
-                        switch(choixactionclub){
-                            case 1:{
-                                Afficher::joueurduclub(club);
-                                break;
-                                }
-                            case 2:{
-                                Creation::palmares(&ligue,club);
-                                break;
-                            }
-                            case 3:{
-                                ligue.destroy(club);
-                                break;
-                            }
+                    switch(choixactionclub){
+                        case 1:{
+                            Afficher::joueurduclub(club);
+                            break;
+                        }
+                        case 2:{
+                            Creation::palmares(&ligue,club);
+                            break;
+                        }
+                        case 3:{
+                            ligue.destroy(club);
+                            break;
+                        }
+                        case 4:{
+                            Afficher::RencontreClub(&ligue,club);
+                            break;
+                        }
+                        case 5:{
+                            Afficher::MontantEncaisse(club);
+                            break;
                         }
                     }
-                    break;
                 }
+                break;
+            }
 
             case 7:{
-                    Creation::calendrierRencontre(&ligue);
-                    break;
-                }
+                Creation::calendrierRencontre(&ligue);
+                break;
+            }
             case 8:{
-                    if(ligue.getCalendrier().size()>0){
-                        CalendierRencontre* calendrier = Traitement::chooseCalendrier(&ligue);
-                        int choixCalendrier;
+                if(ligue.getCalendrier().size()>0){
+                    CalendierRencontre* calendrier = Traitement::chooseCalendrier(&ligue);
+                    int choixCalendrier;
 
-                        std::cout<<"Saisir 1 pour créer une rencontre\n";
-                        std::cout<<"Saisir 2 pour créer une rencontre\n";
-                        if(calendrier->getRencontres().size()>0){
-                            std::cout<<"Saisir 3 pour selectionner une rencontre\n";
-                        }
-                        std::cout<<"Saisir un autre nombre pour revenir en arrière\n";
-                        std::cin>>choixCalendrier;
-
-                        switch(choixCalendrier){
-                            case 1:{
-
-                            }
-                            case 2:{
-
-                            }
-                            case 3:{
-
-                            }
-                        }
-                        
+                    std::cout<<"Saisir 1 pour créer une rencontre\n";
+                    std::cout<<"Saisir 2 pour afficher les rencontres\n";
+                    if(calendrier->getRencontres().size()>0){
+                        std::cout<<"Saisir 3 pour selectionner une rencontre\n";
                     }
-                    break;
+                    std::cout<<"Saisir un autre nombre pour revenir en arrière\n";
+                    std::cin>>choixCalendrier;
+
+                    switch(choixCalendrier){
+                        case 1:{
+                            calendrier->addRencontre(Creation::rencontre(&ligue));
+                            break;
+                        }
+                        case 2:{
+                            for(int i=0;i<calendrier->getRencontres().size();i++){
+                                Afficher::rencontre(calendrier->getRencontres()[i]);
+                            }
+                            break;
+                        }
+                        case 3:{
+                            if(calendrier->getRencontres().size()>0){
+                                Rencontre* rencontre = Traitement::chooseRencontre(calendrier);
+                                int choixRencontre;
+                                std::cout<<"Saisir 1 pour ajouter le match ou le modifier\n";
+                                if(rencontre->getMatch().getListePeriode().size()<0){
+                                    std::cout<<"Saisir 2 pour voir le resultat du match\n";
+                                }
+                                std::cout<<"Saisir un autre nombre pour revenir au debut\n";
+                                std::cin>>choixRencontre;
+
+                                switch(choixRencontre){
+
+                                    case 1:{
+                                        rencontre->setMatch(Creation::match(rencontre));
+                                        break;
+                                    }
+                                    case 2:{
+                                        if(rencontre->getMatch().getListePeriode().size()<0){
+                                            Afficher::match(rencontre->getMatch());
+                                        }
+                                        break;
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                        
                 }
+                break;
+            }
             
-            
-            
-            
-            
+               
             default:{
                 sortie = true;
                 break;

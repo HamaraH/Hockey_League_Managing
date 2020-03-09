@@ -4,12 +4,17 @@ CalendierRencontre::CalendierRencontre(){}
 CalendierRencontre::CalendierRencontre(int annee){
     this->annee=annee;
 }
-CalendierRencontre::CalendierRencontre(int annee, std::vector<Rencontre> rencontres){
+CalendierRencontre::CalendierRencontre(int annee, std::vector<Rencontre*> rencontres){
     this->annee=annee;
     this->rencontres=rencontres;
 }
 
 CalendierRencontre::~CalendierRencontre(){}
+
+void CalendierRencontre::addRencontre(Rencontre* rencontre){
+    this->rencontres.push_back(rencontre);
+}
+
 
 int CalendierRencontre::getAnnee(){
     return this->annee;
@@ -17,9 +22,9 @@ int CalendierRencontre::getAnnee(){
 void CalendierRencontre::setAnnee(int annee){
     this->annee=annee;
 }
-std::vector<Rencontre> CalendierRencontre::getRencontres(){
+std::vector<Rencontre*> CalendierRencontre::getRencontres(){
     return this->rencontres;
 }
-void CalendierRencontre::setRencontres(std::vector<Rencontre> rencontres){
+void CalendierRencontre::setRencontres(std::vector<Rencontre*> rencontres){
     this->rencontres=rencontres;
 }
