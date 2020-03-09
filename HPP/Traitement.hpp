@@ -6,6 +6,8 @@
 #include <vector>
 
 #include "LigueHockey.hpp"
+#include "Contrat_engagement.hpp"
+#include "Joueur_non_autonome.hpp"
 
 class Creation{
 
@@ -21,6 +23,18 @@ class Creation{
         static void stade(LigueHockey*);
         static tm date();
 
+
+        static void calendrierRencontre(LigueHockey*);
+        static Rencontre* rencontre(LigueHockey*);
+        static Match match(Rencontre*);
+        static Resultat* resultat(std::vector<Periode*>);
+        static Periode* periode();
+        static Equipe* equipe(Club*);
+        
+        static Contrat_engagement* contrat_engagement();
+
+        static Joueur_non_autonome* joueur_non_autonome();
+
 };
 
 class Afficher{
@@ -35,6 +49,7 @@ class Afficher{
         static void personne(Personne*);
         static void stade(Stade*);
         static void titre_gagne(Titre_gagne*);
+        
         static void joueurduclub(Club*);
 
 };
@@ -45,6 +60,8 @@ class Traitement{
 
         static Entraineur* entraineurTitre(LigueHockey*);
         static Club* clubTitre(LigueHockey*);
+        static Club* chooseClub(LigueHockey*);
+        static Joueur* chooseJoueur(Club*);
 
 };
 
