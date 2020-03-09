@@ -447,17 +447,33 @@ void Afficher::calendrierRencontre(CalendierRencontre* calendrier){
 void Afficher::rencontre(Rencontre* rencontre){
     std::cout<<"Club de "<<rencontre->getLocal()->getVille()<<" vs Club de "<<rencontre->getInvite()->getVille()<<" le "<<rencontre->getDate().tm_year+1900<<"/"<<rencontre->getDate().tm_mon+1<<"/"<<rencontre->getDate().tm_mday<<"\n";
 }
-void Afficher::match(Match){
-    
+void Afficher::match(Match match){
+    std::cout<<match.getEquipeLocale()->getClub()->getVille()<< " contre "<<match.getEquipeInvitee()->getClub()->getVille()<<"\n";
+    Afficher::resultat(match.getResultatFinal);
 }
-void Afficher::resultat(Resultat*){}
-void Afficher::periode(Periode*){}
-void Afficher::equipe(Equipe*){}
+void Afficher::resultat(Resultat* res){
+    std::cout<<res->getNbButsLocale()<<" à "<< res->getNbButsAdverse()<<"\n";
+}
+void Afficher::periode(Periode* perio){
+    std::cout<<perio->getNbButsLocale()<<" à "<<perio->getNbButsAdverse()<<" pour une durée de "<<perio->getDuree()<<"\n";
+}
+void Afficher::equipe(Equipe* equipe){
+    std::cout<<"Club de "<<equipe->getClub()->getVille()<<" dirigé par ";
+    Afficher::joueur(equipe->getCapitaineEquipe());
+}
         
-void Afficher::contrat_engagement(Contrat_engagement*){}
-void Afficher::reglement(Reglement*){}
+void Afficher::contrat_engagement(Contrat_engagement* engagement){
+    std::cout<<"Club de "<<engagement->getClubLibere()->getVille()<<" à "<<engagement->getClubContractant()->getVille()<<" pour ";
+    Afficher::joueur(engagement->getJoueurContractant());
 
-void Afficher::joueur_non_autonome(Joueur_non_autonome*){}
+}
+void Afficher::reglement(Reglement* reglement){
+
+    std::cout<<reglement->getMontantTransfert()<<" avec comme droit "<<reglement->getDescriptionDroits();
+
+}
+
+
 
 
 
@@ -482,7 +498,7 @@ Entraineur* Traitement::entraineurTitre(LigueHockey* ligue){
     else{
         Entraineur* maxtitre = ligue->getentraineurs()[0];
         for(int i=1;i<ligue->getentraineurs().size();i++){
-            if(ligue->getentraineurs()[i]->getTitres().size() < maxtitre->getTitres().size()){
+            if(ligue->getentraineurs()[i]->getTitres().size() > maxtitre->getTitres().size()){
                 maxtitre = ligue->getentraineurs()[i];
             }
 
@@ -499,7 +515,7 @@ Club* Traitement::clubTitre(LigueHockey* ligue){
     else{
         Club* maxclub = ligue->getclubs()[0];
         for(int i=1;i<ligue->getclubs().size();i++){
-            if(ligue->getclubs()[i]->getPalmares().size() < maxclub->getPalmares().size()){
+            if(ligue->getclubs()[i]->getPalmares().size() > maxclub->getPalmares().size()){
                 maxclub = ligue->getclubs()[i];
             }
 
