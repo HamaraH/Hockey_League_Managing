@@ -17,7 +17,7 @@ class Resultat{
     int getNbButsLocale();
     void setNbButsLocale(int);
 
-    int nbButsAdverse();
+    int getNbButsAdverse();
     void setNbButsAdverse(int);
 
 };

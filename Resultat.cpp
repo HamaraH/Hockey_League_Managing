@@ -24,7 +24,7 @@ void Resultat::setNbButsLocale(int nb){
 
 }
 
-int Resultat::nbButsAdverse(){
+int Resultat::getNbButsAdverse(){
 
     return this->nbButsAdverse;
 

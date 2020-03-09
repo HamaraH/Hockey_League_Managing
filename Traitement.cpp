@@ -102,7 +102,7 @@ Joueur* Creation::joueur(){
     std::string name;
     std::string surname;
     float taille;
-    float poid;
+    float poids;
     std::string ville;
     Joueur* joueur;
     std::string debug;
@@ -116,10 +116,10 @@ Joueur* Creation::joueur(){
     printf("Saisir la taille du joueur : \n");
     std::cin>>taille;
     printf("Saisir le poids du joueur : \n");
-    std::cin>>poid;
+    std::cin>>poids;
     
 
-    joueur = new Joueur(name,surname,taille,poid,ville);
+    joueur = new Joueur(name,surname,taille,poids,ville);
 
     printf("Voulez vous ajouter des parcours? Entrer le nombre de parcours\n");
     int nb_parcours;

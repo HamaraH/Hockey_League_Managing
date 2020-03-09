@@ -1,17 +1,19 @@
 #ifndef JOUEUR_H
 #define JOUEUR_H
 
+
+#include "Sportif.hpp"
+#include "Parcours.hpp"
+
 #include <iostream>
 #include <string>
 #include <vector>
-#include "Parcours.hpp"
 
-class Joueur{
+
+class Joueur : public Sportif{
 
     private:
 
-        std::string Nom;
-        std::string Prenom;
         float Taille;
         float Poids;
         std::string Ville;
@@ -20,18 +22,12 @@ class Joueur{
     public:
 
     Joueur();
-    Joueur(std::string nom, std::string prenom, float taille, float poids, std::string ville);
-    Joueur(std::string nom, std::string prenom, float taille, float poids, std::string ville, std::vector<Parcours*>);
+    Joueur(std::string, std::string,float taille, float poids, std::string ville, std::vector<Parcours*>);
+    Joueur(std::string, std::string,float taille, float poids, std::string ville);
 
     ~Joueur();
 
     void ajout_parcours(Parcours*);
-
-    std::string getNom();
-    void setNom(std::string nom);
-
-    void setPrenom(std::string nom);
-    std::string getPrenom();
 
     void setTaille(float taille);
     float getTaille();

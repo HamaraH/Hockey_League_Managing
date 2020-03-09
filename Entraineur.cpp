@@ -1,23 +1,25 @@
 #include "Entraineur.hpp"
+#include "Sportif.hpp"
 
+#include <string>
 
     Entraineur::Entraineur(){
-        this->nom = "default_name";
-        this->prenom = "default_surname";
-        this->lieu_grade = "default_grade_area";
+
+    }
+
+    Entraineur::Entraineur(std::string nom, std::string prenom, std::string lieu_grade, std::vector<Titre_gagne*> liste_titre) : Sportif(nom, prenom){
+
+        this->lieu_grade=lieu_grade;
+        this->titres = liste_titre;
+
     }
 
     Entraineur::Entraineur(std::string nom,std::string prenom,std::string lieu_grade){
-        this->nom=nom;
-        this->prenom =prenom;
-        this->lieu_grade=lieu_grade;
-    }
 
-    Entraineur::Entraineur(std::string nom,std::string prenom,std::string lieu_grade,std::vector<Titre_gagne*> titres){
-        this->nom=nom;
-        this->prenom =prenom;
-        this->lieu_grade=lieu_grade;
-        this->titres=titres;
+        this->setNom(nom);
+        this->setPrenom(prenom);
+        this->setLieuGrade(lieu_grade);
+        
     }
 
     Entraineur::~Entraineur(){
@@ -49,22 +51,6 @@
             }
         }
         return titre_du_club;
-    }
-
-    std::string Entraineur::getNom(){
-        return this->nom;
-    }
-
-    void Entraineur::setNom(std::string nom){
-        this->nom=nom;
-    }
-
-    std::string Entraineur::getPrenom(){
-        return this->prenom;
-    }
-
-    void Entraineur::setPrenom(std::string prenom){
-        this->prenom=prenom;
     }
 
     std::string Entraineur::getLieuGrade(){

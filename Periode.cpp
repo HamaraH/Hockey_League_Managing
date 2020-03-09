@@ -39,7 +39,7 @@ void Periode::setNbButsLocale(int nb){
 
 int Periode::getNbButsAdverse(){
 
-    this->nbButsAdverse;
+   return this->nbButsAdverse;
 
 }
 

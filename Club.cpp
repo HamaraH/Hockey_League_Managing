@@ -1,12 +1,13 @@
 #include <iostream>
 #include <string>
+
 #include "Club.hpp"
 
 using namespace std;
 
     Club::Club(){}
 
-    Club::Club(string histoire, string couleur,std::tm date,vector<Joueur*> liste,std::vector<Palmares*> palmares,Stade* stade, string ville, string adresse,vector<Personne*> staff_technique){
+    Club::Club(string histoire, string couleur,std::tm date,vector<Joueur*> liste,std::vector<Palmares*> palmares,Stade* stade, string ville, string adresse,vector<Personne*> staff_technique, vector<Contrat*> listeTransfert){
 
         this->histoire=histoire;
         this->couleur=couleur;
@@ -17,6 +18,8 @@ using namespace std;
         this->ville = ville;
         this->adresse = adresse;
         this->staff_technique = staff_technique;
+        this->listeTransfert = listeTransfert;
+
     }
 
     Club::Club(std::string histoire, std::string couleur,std::tm, Stade* stade, std::string ville, std::string adresse){
@@ -26,8 +29,8 @@ using namespace std;
         this->stade=stade;
         this->ville = ville;
         this->adresse = adresse;
-    }
 
+    }
 
     Club::~Club(){
         
@@ -161,12 +164,12 @@ using namespace std;
 
    }
 
-   void Club::setListeTransfert(std::vector<Transfert*> liste_transfert){
+   void Club::setListeTransfert(std::vector<Contrat*> liste_transfert){
 
        this->listeTransfert = liste_transfert;
    }
 
-   std::vector<Transfert*> Club::getListeTransfert(){
+   std::vector<Contrat*> Club::getListeTransfert(){
 
        return this->listeTransfert;
        
