@@ -15,7 +15,7 @@ class Joueur_non_autonome : public Joueur{
     public :
 
     Joueur_non_autonome(float, float, std::string, std::vector<Parcours*>,int, std::string, std::string);
-        Joueur_non_autonome(float, float, std::string,int, std::string, std::string);
+    Joueur_non_autonome(float, float, std::string,int, std::string, std::string);
 
     Joueur_non_autonome();
     ~Joueur_non_autonome();
