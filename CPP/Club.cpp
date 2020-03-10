@@ -183,7 +183,7 @@ vector<Contrat*> Club::getListeRupture(){
 
     }
 
-void Club::ajout_contrat(Contrat* contrat){
+/*void Club::ajout_contrat(Contrat* contrat){
 
     if (typeid(contrat) == typeid(Rupture*)){
 
@@ -193,8 +193,8 @@ void Club::ajout_contrat(Contrat* contrat){
     else{
 
         this->listeTransfert.push_back(contrat);
-        
-    }
-}
+
+    }*/
+
 
 

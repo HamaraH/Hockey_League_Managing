@@ -8,6 +8,7 @@
 #include "LigueHockey.hpp"
 #include "Contrat_engagement.hpp"
 #include "Joueur_non_autonome.hpp"
+#include "Rupture.hpp"
 
 class Creation{
 

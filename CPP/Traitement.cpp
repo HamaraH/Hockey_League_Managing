@@ -662,7 +662,7 @@ void Traitement::ajoutTransfert(LigueHockey* ligue){
 
     else{  //Joueur non-autonome -> rupture
 
-        std::vector<Rupture*> r = club_depart->getListeRupture();
+        std::vector<Contrat*> r = club_depart->getListeRupture();
         r.push_back(Creation::rupture(ligue,joueur,club_arrivee));
         club_depart->setListeRupture(r);
         

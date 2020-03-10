@@ -9,7 +9,6 @@
 #include "Stade.hpp"
 #include "Personne.hpp"
 #include "Contrat.hpp"
-#include "Rupture.hpp"
 
 class Club{
 
