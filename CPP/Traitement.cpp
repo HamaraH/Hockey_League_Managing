@@ -4,6 +4,8 @@
 #include <stdio.h>
 
 void Creation::club(LigueHockey* ligue){
+        std::cin.clear();
+
 
     std::string histoire;
     std::string couleur;
@@ -82,6 +84,8 @@ void Creation::club(LigueHockey* ligue){
 }
 
 void Creation::entraineur(LigueHockey* ligue){
+        std::cin.clear();
+
     std::string name;
     std::string surname;
     std::string lieu_grade;
@@ -97,6 +101,8 @@ void Creation::entraineur(LigueHockey* ligue){
     ligue->addentaineur(new Entraineur(name, surname,lieu_grade));
 }    
 Joueur* Creation::joueur(){
+        std::cin.clear();
+
     std::string name;
     std::string surname;
     float taille;
@@ -116,6 +122,8 @@ Joueur* Creation::joueur(){
     printf("Saisir le poids du joueur : \n");
     std::cin>>poids;
     
+    std::cin.clear();
+
     int autonome;
     std::cout<<"Le joueur est il autonome? (0 =non), autre = oui\n";
     if(autonome ==0){
@@ -131,12 +139,15 @@ Joueur* Creation::joueur(){
     int nb_parcours;
     scanf("%d",nb_parcours);
     for(int i=0;i<nb_parcours;i++){
+        std::cin.clear();
         printf("Creation du parcours %d :\n",i+1);
         joueur->ajout_parcours(Creation::parcours());
     }
     return joueur;
 }
 void Creation::palmares(Club* club, Entraineur* entraineur){
+    std::cin.clear();
+
     std::string titre;
 
     printf("Saisir le titre du palamares : \n");
@@ -149,6 +160,8 @@ void Creation::palmares(Club* club, Entraineur* entraineur){
 }
 
 void Creation::palmares(LigueHockey* ligue,Club* club){
+        std::cin.clear();
+
     Entraineur* entraineur;
 
     bool creation_entraineur = true;
@@ -184,6 +197,8 @@ void Creation::palmares(LigueHockey* ligue,Club* club){
 }
 
 Parcours* Creation::parcours(){
+        std::cin.clear();
+
     std::string nom_club;
 
     printf("Saisir le nom du club : \n");
@@ -208,6 +223,8 @@ Personne* Creation::personne(){
     return new Personne(nom, age, fonction);
 }
 void Creation::stade(LigueHockey* ligue){
+        std::cin.clear();
+
     int capacite;
     std::string qualite;
     std::string nom;
@@ -228,6 +245,8 @@ void Creation::stade(LigueHockey* ligue){
 }
 
 tm Creation::date(){
+        std::cin.clear();
+
     std::string date;
     tm localdate;
     int year, mounth, day;
@@ -268,6 +287,8 @@ void Creation::calendrierRencontre(LigueHockey* ligue){
 }
 
 Rencontre* Creation::rencontre(LigueHockey* ligue){
+        std::cin.clear();
+
 
     while(ligue->getclubs().size()<2){
         //tant qu'il n'y a pas deux clubs
@@ -286,6 +307,8 @@ Rencontre* Creation::rencontre(LigueHockey* ligue){
 }
 
 Match Creation::match(Rencontre* rencontre){
+        std::cin.clear();
+
 
     Equipe* equipe1 = Creation::equipe(rencontre->getLocal());
     Equipe* equipe2 = Creation::equipe(rencontre->getInvite());
@@ -303,6 +326,8 @@ Match Creation::match(Rencontre* rencontre){
 }
 
 Periode* Creation::periode(){
+        std::cin.clear();
+
     int duree, nbButLocal, nbButinvite;
     std::cout<<"Saisir la duree de la periode : ";
     scanf("%d",duree);
@@ -318,6 +343,8 @@ Periode* Creation::periode(){
 }
 
 Resultat* Creation::resultat(std::vector<Periode*> periodes){
+        std::cin.clear();
+
     int nbButlocal=0 ,nbButinvite=0;
 
     for(int i=0;i<periodes.size();i++){
@@ -328,6 +355,7 @@ Resultat* Creation::resultat(std::vector<Periode*> periodes){
 }
 
 Equipe* Creation::equipe(Club* club){
+    std::cin.clear();
 
     int nbJoueur, nbGardien;
     Joueur* capitaine;
