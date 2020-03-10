@@ -3,5 +3,6 @@
 
 int main(int argc, const char* argv[]){
 
-    return Traitement::ApplicationBody();
+    Traitement::ApplicationBody();
+    return 0;
 }

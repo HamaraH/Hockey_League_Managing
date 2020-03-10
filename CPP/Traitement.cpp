@@ -120,7 +120,7 @@ Joueur* Creation::joueur(){
     std::cout<<"Le joueur est il autonome? (0 =non), autre = oui\n";
     if(autonome ==0){
         int nb_annee;
-        std::cout<<"Saisir le nombre d'année minimum de son contrat :\n";
+        std::cout<<"Saisir le nombre d'annee minimum de son contrat :\n";
         std::cin>>nb_annee;
         joueur = new Joueur_non_autonome(taille, poids,ville,nb_annee,name,surname);
     }
@@ -260,7 +260,7 @@ void Creation::calendrierRencontre(LigueHockey* ligue){
 
     int annee;
 
-    std::cout<<"entrer l'année du calendrier : ";
+    std::cout<<"entrer l'annee du calendrier : ";
     std::cin>>annee;
 
     ligue->addcalendrier(new CalendierRencontre(annee));
@@ -291,7 +291,7 @@ Match Creation::match(Rencontre* rencontre){
     Equipe* equipe2 = Creation::equipe(rencontre->getInvite());
     std::vector<Periode*> periodes;
     
-    std::cout<<"choisir le nombre de période : ";
+    std::cout<<"choisir le nombre de periode : ";
     int nbperiode;
     std::cin>> nbperiode;
 
@@ -304,13 +304,13 @@ Match Creation::match(Rencontre* rencontre){
 
 Periode* Creation::periode(){
     int duree, nbButLocal, nbButinvite;
-    std::cout<<"Saisir la durée de la période : ";
+    std::cout<<"Saisir la duree de la periode : ";
     std::cin>>duree;
 
-    std::cout<<"Saisir le nombre de but de l'équipe local : ";
+    std::cout<<"Saisir le nombre de but de l'equipe local : ";
     std::cin>>nbButLocal;
 
-    std::cout<<"Saisir le nombre de bu de l'équipe invité : ";
+    std::cout<<"Saisir le nombre de bu de l'equipe invite : ";
     std::cin>>nbButinvite;
 
     return new Periode(duree,nbButLocal,nbButinvite);
@@ -349,17 +349,19 @@ Equipe* Creation::equipe(Club* club){
 Contrat_engagement* Creation::contrat_engagement(LigueHockey* ligue, Club* club_depart, Club* club_arrivee, Joueur* joueur){
 
     int duree;
-    std::cout<<"saisir la durée du contrat : ";
+    std::cout<<"saisir la duree du contrat : ";
     std::cin>>duree;
 
     tm dateEntree, dateContrat;
-    std::cout<<"Saisir la date d'entrée : ";
+    std::cout<<"Saisir la date d'entree : ";
     dateEntree = Creation::date();
 
     std::cout<<"Saisir la date du contrat : ";
     dateContrat= Creation::date();
 
-    return new Contrat_engagement(club_depart,club_arrivee,joueur,duree,dateEntree,Creation::reglement(),dateContrat);
+    Reglement* reglement = Creation::reglement();
+
+    return new Contrat_engagement(joueur,club_depart,club_arrivee,duree,dateEntree,reglement,dateContrat);
 
 }
         
@@ -372,17 +374,17 @@ Contrat_engagement* Creation::contrat_engagement(LigueHockey* ligue){
     Joueur* joueur = Traitement::chooseJoueur(provenance);
 
     int duree;
-    std::cout<<"saisir la durée du contrat : ";
+    std::cout<<"saisir la duree du contrat : ";
     std::cin>>duree;
 
     tm dateEntree, dateContrat;
-    std::cout<<"Saisir la date d'entrée : ";
+    std::cout<<"Saisir la date d'entree : ";
     dateEntree = Creation::date();
 
     std::cout<<"Saisir la date du contrat : ";
     dateContrat= Creation::date();
 
-    return new Contrat_engagement(destination,provenance,joueur,duree,dateEntree,Creation::reglement(),dateContrat);
+    return new Contrat_engagement(joueur,destination,provenance,duree,dateEntree,Creation::reglement(),dateContrat);
 
 }
 
@@ -395,7 +397,7 @@ Rupture* Creation::rupture(LigueHockey* ligue,Joueur* joueur, Club* club){
     std::cin>>raison;
 
     float penalite;
-    std::cout<<"Saisir la pénalité :";
+    std::cout<<"Saisir la penalite :";
     std::cin>>penalite;
 
     return new Rupture(joueur,raison,club,penalite);
@@ -418,7 +420,7 @@ Reglement* Creation::reglement(){
     std::cout<<"Saisir le montant du transfert : ";
     std::cin>>montantTransfert;
 
-    std::cout<<"Saisir le montant encaissé : ";
+    std::cout<<"Saisir le montant encaisse : ";
     std::cin>>montantEncaisse;
 
     std::cout<<"Saisir le montant restant : ";
@@ -434,7 +436,7 @@ Joueur_non_autonome* Creation::joueur_non_autonome(){
 
     int nbAnnee;
 
-    std::cout<<"Saisir le nombre d'année minimum dans le club : ";
+    std::cout<<"Saisir le nombre d'annee minimum dans le club : ";
     std::cin>>nbAnnee;
 
     Joueur_non_autonome* joueurna = new Joueur_non_autonome(joueur->getTaille(),joueur->getPoids(), joueur->getVille(),joueur->getParcours(),nbAnnee,joueur->getNom(), joueur->getPrenom());
@@ -485,7 +487,7 @@ void Afficher::joueurduclub(Club* club){
 }
 
 void Afficher::calendrierRencontre(CalendierRencontre* calendrier){
-    std::cout<<"Calendrier de l'année "<<calendrier->getAnnee()<<"\n";
+    std::cout<<"Calendrier de l'annee "<<calendrier->getAnnee()<<"\n";
 }
 void Afficher::rencontre(Rencontre* rencontre){
     std::cout<<"Club de "<<rencontre->getLocal()->getVille()<<" vs Club de "<<rencontre->getInvite()->getVille()<<" le "<<rencontre->getDate().tm_year+1900<<"/"<<rencontre->getDate().tm_mon+1<<"/"<<rencontre->getDate().tm_mday<<"\n";
@@ -495,18 +497,18 @@ void Afficher::match(Match match){
     Afficher::resultat(match.getResultatFinal());
 }
 void Afficher::resultat(Resultat* res){
-    std::cout<<res->getNbButsLocale()<<" à "<< res->getNbButsAdverse()<<"\n";
+    std::cout<<res->getNbButsLocale()<<" a "<< res->getNbButsAdverse()<<"\n";
 }
 void Afficher::periode(Periode* perio){
-    std::cout<<perio->getNbButsLocale()<<" à "<<perio->getNbButsAdverse()<<" pour une durée de "<<perio->getDuree()<<"\n";
+    std::cout<<perio->getNbButsLocale()<<" a "<<perio->getNbButsAdverse()<<" pour une duree de "<<perio->getDuree()<<"\n";
 }
 void Afficher::equipe(Equipe* equipe){
-    std::cout<<"Club de "<<equipe->getClub()->getVille()<<" dirigé par ";
+    std::cout<<"Club de "<<equipe->getClub()->getVille()<<" dirige par ";
     Afficher::joueur(equipe->getCapitaineEquipe());
 }
         
 void Afficher::contrat_engagement(Contrat_engagement* engagement){
-    std::cout<<"Club de "<<engagement->getClubLibere()->getVille()<<" à "<<engagement->getClubContractant()->getVille()<<" pour ";
+    std::cout<<"Club de "<<engagement->getClubLibere()->getVille()<<" a "<<engagement->getClubContractant()->getVille()<<" pour ";
     Afficher::joueur(engagement->getJoueurContractant());
 
 }
@@ -534,10 +536,10 @@ void Afficher::MontantEncaisse(Club* club){
 
     for(int i=0;i<club->getListeTransfert().size();i++){
         if( ((Contrat_engagement*)club->getListeTransfert()[i])->getClubLibere()==club){
-            montant += club->getListeTransfert()[i]->getReglement()->getMontantEncaisse();
+            montant += ((Contrat_engagement*)club->getListeTransfert()[i])->getReglement()->getMontantEncaisse();
         }
     }
-    std::cout<<" le montant encaissé est de "<<montant<<"\n";
+    std::cout<<" le montant encaisse est de "<<montant<<"\n";
 }
 
 
@@ -620,26 +622,26 @@ Joueur* Traitement::chooseJoueur(Club* club){
 
 CalendierRencontre* Traitement::chooseCalendrier(LigueHockey* ligue){
     for(int i=0;i<ligue->getCalendrier().size();i++){
-        std::cout<<"Numéro du calendrier :"<<i<<" ";
+        std::cout<<"Numero du calendrier :"<<i<<" ";
         Afficher::calendrierRencontre(ligue->getCalendrier()[i]);
     }
     int choixCalendrier;
     do{
-        std::cout<<"Saisir le numéro du calendrier voulu : ";
+        std::cout<<"Saisir le numero du calendrier voulu : ";
         std::cin>>choixCalendrier;
     }while(choixCalendrier<0||choixCalendrier>=ligue->getCalendrier().size());
 
     return ligue->getCalendrier()[choixCalendrier];
 }
 
-Rencontre* chooseRencontre(CalendierRencontre* calendrier){
+Rencontre* Traitement::chooseRencontre(CalendierRencontre* calendrier){
     for (int i=0;i<calendrier->getRencontres().size();i++){
-        std::cout<<"Numéro de la rendontre :"<<i<<" ";
+        std::cout<<"Numero de la rendontre :"<<i<<" ";
         Afficher::rencontre(calendrier->getRencontres()[i]);
     }
     int choixRencontre;
     do{
-        std::cout<<"Saisir le numéro de la rencontre voulu : ";
+        std::cout<<"Saisir le numero de la rencontre voulu : ";
         std::cin>>choixRencontre;
     }while(choixRencontre<0||choixRencontre>=calendrier->getRencontres().size());
     return calendrier->getRencontres()[choixRencontre];
@@ -694,12 +696,12 @@ int Traitement::ApplicationBody(){
             std::cout<<"Appuyez sur 6 pour selectionner un club\n";
         }
 
-        std::cout<<"Appuyez sur 7 pour créer un calendrier de rencontre\n";
+        std::cout<<"Appuyez sur 7 pour creer un calendrier de rencontre\n";
         if(ligue.getCalendrier().size()>0){
-            std::cout<<"Appuyez sur 8 pour sélectionner un calendrier";
+            std::cout<<"Appuyez sur 8 pour selectionner un calendrier";
         }
 
-        std::cout<<"Appuyez sur un autre nombre superieur a X pour sortir\n"; 
+        std::cout<<"Appuyez sur un autre nombre superieur a 8 pour sortir\n"; 
 
         std::cin>>choix;
 
@@ -738,7 +740,7 @@ int Traitement::ApplicationBody(){
             case 6:{
                 if(ligue.getclubs().size()>0){
                     Club* club = Traitement::chooseClub(&ligue);                   
-                    std::cout<<"1 : voir les joueurs \n2 : ajouter un palmares \n3 : supprimer le club \n4 calendrier rencontre\n5 monatant des transfert encaissé\n autre : retour au debut\n";
+                    std::cout<<"1 : voir les joueurs \n2 : ajouter un palmares \n3 : supprimer le club \n4 calendrier rencontre\n5 monatant des transfert encaisse\n autre : retour au debut\n";
                     int choixactionclub;
                     std::cin>>choixactionclub;
 
@@ -777,12 +779,12 @@ int Traitement::ApplicationBody(){
                     CalendierRencontre* calendrier = Traitement::chooseCalendrier(&ligue);
                     int choixCalendrier;
 
-                    std::cout<<"Saisir 1 pour créer une rencontre\n";
+                    std::cout<<"Saisir 1 pour creer une rencontre\n";
                     std::cout<<"Saisir 2 pour afficher les rencontres\n";
                     if(calendrier->getRencontres().size()>0){
                         std::cout<<"Saisir 3 pour selectionner une rencontre\n";
                     }
-                    std::cout<<"Saisir un autre nombre pour revenir en arrière\n";
+                    std::cout<<"Saisir un autre nombre pour revenir en arriere\n";
                     std::cin>>choixCalendrier;
 
                     switch(choixCalendrier){
