@@ -11,31 +11,15 @@ class Contrat{
     private :
 
         Joueur* joueurContractant;
-        int dureeContrat;
-        tm dateEntree;
-        Reglement* reglement;
-        tm dateContrat;
 
     public :
 
     Contrat();
-    Contrat(Joueur*, int, tm, Reglement*, tm);
+    Contrat(Joueur*);
     ~Contrat();
 
     Joueur* getJoueurContractant();
     void setJoueurContractant(Joueur*);
-    
-    int getDureeContrat();
-    void setDureeContrat(int);
-
-    tm getDateEntree();
-    void setDateEntree(tm);
-
-    Reglement* getReglement();
-    void setReglement(Reglement*);
-
-    tm getDateContrat();
-    void setDateContrat(tm);
 
 };
 

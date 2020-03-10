@@ -171,5 +171,30 @@ using namespace std;
        
    }
 
+vector<Contrat*> Club::getListeRupture(){
+
+        return this->listeRupture;
+
+    }
+
+    void Club::setListeRupture(vector<Contrat*> liste){
+
+        this->listeRupture = liste;
+
+    }
+
+void Club::ajout_contrat(Contrat* contrat){
+
+    if (typeid(contrat) == typeid(Rupture*)){
+
+        this->listeRupture.push_back(contrat);
+    
+    }
+    else{
+
+        this->listeTransfert.push_back(contrat);
+        
+    }
+}
 
 

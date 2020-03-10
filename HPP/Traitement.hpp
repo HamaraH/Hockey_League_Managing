@@ -31,7 +31,10 @@ class Creation{
         static Periode* periode();
         static Equipe* equipe(Club*);
         
+        static Contrat_engagement* contrat_engagement(LigueHockey*, Club*, Club*, Joueur*);
         static Contrat_engagement* contrat_engagement(LigueHockey*);
+        static Rupture* rupture(LigueHockey*, Joueur*, Club*);
+
         static Reglement* reglement();
 
         static Joueur_non_autonome* joueur_non_autonome();
@@ -82,6 +85,7 @@ class Traitement{
 
         static CalendierRencontre* chooseCalendrier(LigueHockey*);
         static Rencontre* chooseRencontre(CalendierRencontre*);
+        static void ajoutTransfert(LigueHockey*);
 
 };
 

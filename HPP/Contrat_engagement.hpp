@@ -12,12 +12,16 @@ class Contrat_engagement : public Contrat{
 
     Club* clubContractant;
     Club* clubLibere;
+    int dureeContrat;
+    tm dateEntree;
+    Reglement* reglement;
+    tm dateContrat;
 
     public:
 
     Contrat_engagement();
-    Contrat_engagement(Club*, Club*);
-    Contrat_engagement(Club*, Club*,Joueur*, int, tm, Reglement*, tm);
+    Contrat_engagement(Joueur*,Club*, Club*, int, tm, Reglement*, tm);
+    Contrat_engagement(Club*, Club*, int, tm, Reglement*, tm);
     ~Contrat_engagement();
 
     Club* getClubContractant();
@@ -25,6 +29,18 @@ class Contrat_engagement : public Contrat{
 
     Club* getClubLibere();
     void setClubLibere(Club*);
+
+    int getDureeContrat();
+    void setDureeContrat(int);
+
+    tm getDateEntree();
+    void setDateEntree(tm);
+
+    Reglement* getReglement();
+    void setReglement(Reglement*);
+
+    tm getDateContrat();
+    void setDateContrat(tm);
 
 };
 

@@ -346,7 +346,22 @@ Equipe* Creation::equipe(Club* club){
     return new Equipe(club,nbJoueur,nbGardien,capitaine);
 }
 
+Contrat_engagement* Creation::contrat_engagement(LigueHockey* ligue, Club* club_depart, Club* club_arrivee, Joueur* joueur){
 
+    int duree;
+    std::cout<<"saisir la durée du contrat : ";
+    std::cin>>duree;
+
+    tm dateEntree, dateContrat;
+    std::cout<<"Saisir la date d'entrée : ";
+    dateEntree = Creation::date();
+
+    std::cout<<"Saisir la date du contrat : ";
+    dateContrat= Creation::date();
+
+    return new Contrat_engagement(club_depart,club_arrivee,joueur,duree,dateEntree,Creation::reglement(),dateContrat);
+
+}
         
 Contrat_engagement* Creation::contrat_engagement(LigueHockey* ligue){
     std::cout<<"Club de provenance\n";
@@ -369,6 +384,21 @@ Contrat_engagement* Creation::contrat_engagement(LigueHockey* ligue){
 
     return new Contrat_engagement(destination,provenance,joueur,duree,dateEntree,Creation::reglement(),dateContrat);
 
+}
+
+Rupture* Creation::rupture(LigueHockey* ligue,Joueur* joueur, Club* club){
+
+    std::cout<<"Raisons du depart du joueur :\n";
+   
+    std::string raison;
+    std::cout<<"saisir les raisons du depart : ";
+    std::cin>>raison;
+
+    float penalite;
+    std::cout<<"Saisir la pénalité :";
+    std::cin>>penalite;
+
+    return new Rupture(joueur,raison,club,penalite);
 }
 
 Reglement* Creation::reglement(){
@@ -462,7 +492,7 @@ void Afficher::rencontre(Rencontre* rencontre){
 }
 void Afficher::match(Match match){
     std::cout<<match.getEquipeLocale()->getClub()->getVille()<< " contre "<<match.getEquipeInvitee()->getClub()->getVille()<<"\n";
-    Afficher::resultat(match.getResultatFinal);
+    Afficher::resultat(match.getResultatFinal());
 }
 void Afficher::resultat(Resultat* res){
     std::cout<<res->getNbButsLocale()<<" à "<< res->getNbButsAdverse()<<"\n";
@@ -615,7 +645,29 @@ Rencontre* chooseRencontre(CalendierRencontre* calendrier){
     return calendrier->getRencontres()[choixRencontre];
 }
 
+void Traitement::ajoutTransfert(LigueHockey* ligue){
 
+    Club* club_depart = chooseClub(ligue);
+    Club* club_arrivee = chooseClub(ligue);
+    Joueur* joueur = chooseJoueur(club_depart);
+
+    if(typeid(joueur) != typeid(Joueur_non_autonome*)){   //Si le joueur est un joueur autonome (joueur classique)
+
+
+        std::vector<Contrat*> v = club_depart->getListeTransfert();
+        v.push_back(Creation::contrat_engagement(ligue,club_depart,club_arrivee,joueur));
+        club_depart->setListeTransfert(v);
+
+    }
+
+    else{  //Joueur non-autonome -> rupture
+
+        std::vector<Rupture*> r = club_depart->getListeRupture();
+        r.push_back(Creation::rupture(ligue,joueur,club_arrivee));
+        club_depart->setListeRupture(r);
+        
+    }
+}
 
 
 

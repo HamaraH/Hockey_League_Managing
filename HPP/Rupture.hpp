@@ -6,13 +6,13 @@
 
 #include "Joueur.hpp"
 #include "Club.hpp"
+#include "Contrat.hpp"
 
-class Rupture{
+class Rupture : public Contrat{
 
 
     private :
 
-    Joueur* joueur;
     std::string raisonsDepart;
     Club* nouveauClub;
     float penalite;
@@ -20,11 +20,9 @@ class Rupture{
     public :
 
     Rupture();
+    Rupture(std::string, Club*, float);
     Rupture(Joueur*, std::string, Club*, float);
     ~Rupture();
-
-    Joueur* getJoueur();
-    void setJoueur(Joueur*);
 
     std::string getRaisonsDepart();
     void setRaisonsDepart(std::string);

@@ -7,9 +7,17 @@ using namespace std;
 
 Rupture::Rupture(){}
 
-Rupture::Rupture(Joueur* joueur, std::string raisons, Club* club, float penalite){
+Rupture::Rupture(Joueur* joueur, string raisons, Club* club, float penalite){
 
-    this->joueur = joueur;
+    this->setJoueurContractant(joueur);
+    this->raisonsDepart = raisons;
+    this->nouveauClub = club;
+    this->penalite = penalite;
+
+}
+
+Rupture::Rupture(string raisons, Club* club, float penalite){
+
     this->raisonsDepart = raisons;
     this->nouveauClub = club;
     this->penalite = penalite;
@@ -17,18 +25,6 @@ Rupture::Rupture(Joueur* joueur, std::string raisons, Club* club, float penalite
 }
 
 Rupture::~Rupture(){}
-
-Joueur* Rupture::getJoueur(){
-
-    return this->joueur;
-
-}
-
-void Rupture::setJoueur(Joueur* joueur){
-
-    this->joueur = joueur;
-
-}
 
 string Rupture::getRaisonsDepart(){
 

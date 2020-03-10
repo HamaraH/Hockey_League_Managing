@@ -9,7 +9,7 @@
 #include "Stade.hpp"
 #include "Personne.hpp"
 #include "Contrat.hpp"
-
+#include "Rupture.hpp"
 
 class Club{
 
@@ -25,6 +25,7 @@ class Club{
     std::string adresse;
     std::vector<Personne*> staff_technique;
     std::vector<Contrat*> listeTransfert;
+    std::vector<Contrat*> listeRupture;
 
     public:
 
@@ -37,6 +38,7 @@ class Club{
     void ajout_joueur(Joueur*);
     void ajout_personne(Personne*);
 
+    void ajout_contrat(Contrat*);
 
     std::string getHistoire();
     void setHistoire(std::string histoire);
@@ -67,6 +69,9 @@ class Club{
 
     void setListeTransfert(std::vector<Contrat*> liste_transfert);
     std::vector<Contrat*> getListeTransfert();
+    
+    std::vector<Contrat*> getListeRupture();
+    void setListeRupture(std::vector<Contrat*>);
 
 
 };
