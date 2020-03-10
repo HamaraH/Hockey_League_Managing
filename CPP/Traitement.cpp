@@ -129,7 +129,7 @@ Joueur* Creation::joueur(){
     }
     printf("Voulez vous ajouter des parcours? Entrer le nombre de parcours\n");
     int nb_parcours;
-    std::cin>>nb_parcours;
+    scanf("%d",nb_parcours);
     for(int i=0;i<nb_parcours;i++){
         printf("Creation du parcours %d :\n",i+1);
         joueur->ajout_parcours(Creation::parcours());
@@ -293,7 +293,7 @@ Match Creation::match(Rencontre* rencontre){
     
     std::cout<<"choisir le nombre de periode : ";
     int nbperiode;
-    std::cin>> nbperiode;
+    scanf("%d",nbperiode);
 
     for(int i=0;i<nbperiode;i++){
         periodes.push_back(Creation::periode());
@@ -305,13 +305,13 @@ Match Creation::match(Rencontre* rencontre){
 Periode* Creation::periode(){
     int duree, nbButLocal, nbButinvite;
     std::cout<<"Saisir la duree de la periode : ";
-    std::cin>>duree;
+    scanf("%d",duree);
 
     std::cout<<"Saisir le nombre de but de l'equipe local : ";
-    std::cin>>nbButLocal;
+    scanf("%d",nbButLocal);
 
     std::cout<<"Saisir le nombre de bu de l'equipe invite : ";
-    std::cin>>nbButinvite;
+    scanf("%d",nbButinvite);
 
     return new Periode(duree,nbButLocal,nbButinvite);
 
@@ -333,10 +333,10 @@ Equipe* Creation::equipe(Club* club){
     Joueur* capitaine;
 
     std::cout<<"Saisir le nombre de joueurs : ";
-    std::cin>>nbJoueur;
+    scanf("%d",nbJoueur);
 
     std::cout<<"Saisir le nombre de guardiens : ";
-    std::cin>>nbGardien;
+    scanf("%d",nbGardien);
 
     while(club->getListeJoueurs().size()<1){
         club->ajout_joueur(Creation::joueur());
@@ -350,7 +350,7 @@ Contrat_engagement* Creation::contrat_engagement(LigueHockey* ligue, Club* club_
 
     int duree;
     std::cout<<"saisir la duree du contrat : ";
-    std::cin>>duree;
+    scanf("%d",duree);
 
     tm dateEntree, dateContrat;
     std::cout<<"Saisir la date d'entree : ";
@@ -375,7 +375,7 @@ Contrat_engagement* Creation::contrat_engagement(LigueHockey* ligue){
 
     int duree;
     std::cout<<"saisir la duree du contrat : ";
-    std::cin>>duree;
+    scanf("%d",duree);
 
     tm dateEntree, dateContrat;
     std::cout<<"Saisir la date d'entree : ";
@@ -437,7 +437,7 @@ Joueur_non_autonome* Creation::joueur_non_autonome(){
     int nbAnnee;
 
     std::cout<<"Saisir le nombre d'annee minimum dans le club : ";
-    std::cin>>nbAnnee;
+    scanf("%d",nbAnnee);
 
     Joueur_non_autonome* joueurna = new Joueur_non_autonome(joueur->getTaille(),joueur->getPoids(), joueur->getVille(),joueur->getParcours(),nbAnnee,joueur->getNom(), joueur->getPrenom());
     joueur->~Joueur();
